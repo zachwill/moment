@@ -25,9 +25,12 @@ class Moment(MutableDate):
     def utc(self, date=None, formula=None):
         return self
 
-    def unix(self, timestamp):
+    def unix(self, timestamp, utc=False):
         """Create a date from a Unix timestamp."""
-        self._time = datetime.utcfromtimestamp(timestamp)
+        if utc:
+            self._date = datetime.utcfromtimestamp(timestamp)
+        else:
+            self._date = datetime.fromtimestamp(timestamp)
         return self
 
     def add(self, key, amount):

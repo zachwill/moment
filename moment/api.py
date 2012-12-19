@@ -20,6 +20,6 @@ def utc(date=None, formula=None):
     return Moment().utc(date, formula)
 
 
-def unix(timestamp):
+def unix(timestamp, utc=False):
     """Create a date from a Unix timestamp."""
-    return Moment().unix(timestamp)
+    return Moment().unix(timestamp, utc)
