@@ -49,25 +49,26 @@ class Moment(MutableDate):
         """Subtract time from the original moment."""
         return self
 
-    def local(self):
-        """Turn your UTC datetime into a local time zone datetime."""
-        self._date = datetime.fromtimestamp(timegm(self._date.timetuple()))
-        return self
-
-    def timezone(self, zone):
+    def timezone(self, zone=None):
         """Explicitly set the time zone you want to work with."""
-        try:
-            self._date = pytz.timezone(zone).localize(self._date)
-        except ValueError:
-            self._date = self._date.replace(tzinfo=pytz.timezone(zone))
+        if not zone:
+            self._date = datetime.fromtimestamp(timegm(self._date.timetuple()))
+        else:
+            try:
+                self._date = pytz.timezone(zone).localize(self._date)
+            except ValueError:
+                self._date = self._date.replace(tzinfo=pytz.timezone(zone))
         return self
 
-    def to_zone(self, zone):
+    def locale(self, zone):
         """Change the time zone and affect the current moment's time."""
+        date = self._date
         try:
-            times.to_local(times.to_universal(self._date), zone)
+            date = times.to_local(times.to_universal(date), zone)
         except:
-            times.to_local(self._date, zone)
+            date = times.to_local(date, zone)
+        finally:
+            self._date = date
         return self
 
     def format(self, formula):
