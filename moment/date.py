@@ -3,7 +3,7 @@ Where the magic happens.
 """
 
 import calendar
-from datetime import  datetime
+from datetime import  datetime, timedelta
 
 
 def add_month(date, number):
@@ -32,35 +32,120 @@ class MutableDate(object):
     def __init__(self, date):
         self._date = date
 
-    def epoch(self):
-        """Milliseconds since epoch."""
+    def add(self, key, amount):
+        """Add time to the original moment."""
+        if key == 'years':
+            self._date = add_month(self._date, amount * 12)
+        elif key == 'months':
+            self._date = add_month(self._date, amount)
+        elif key == 'weeks':
+            self._date += timedelta(weeks=amount)
+        elif key == 'days':
+            self._date += timedelta(days=amount)
+        elif key == 'minutes':
+            self._date += timedelta(minutes=amount)
+        elif key == 'seconds':
+            self._date += timedelta(seconds=amount)
+        elif key == 'milliseconds':
+            self._date += timedelta(milliseconds=amount)
+        elif key == 'microseconds':
+            self._date += timedelta(microseconds=amount)
         return self
 
+    def subtract(self, key, amount):
+        """Subtract time from the original moment."""
+        if key == 'years':
+            self._date = subtract_month(self._date, amount * 12)
+        elif key == 'months':
+            self._date = subtract_month(self._date, amount)
+        elif key == 'weeks':
+            self._date -= timedelta(weeks=amount)
+        elif key == 'days':
+            self._date -= timedelta(days=amount)
+        elif key == 'minutes':
+            self._date -= timedelta(minutes=amount)
+        elif key == 'seconds':
+            self._date -= timedelta(seconds=amount)
+        elif key == 'milliseconds':
+            self._date -= timedelta(milliseconds=amount)
+        elif key == 'microseconds':
+            self._date -= timedelta(microseconds=amount)
+        return self
+
+    def epoch(self, rounding=True):
+        """Milliseconds since epoch."""
+        zero = datetime.utcfromtimestamp(0)
+        delta = self._date - zero
+        seconds = delta.total_seconds() * 1000
+        if rounding:
+            seconds = round(seconds)
+        return seconds
+
     def year(self, number):
+        """Mutate the original moment by changing the year."""
+        if number < 0:
+            return self.subtract('years', abs(number))
+        date = self._date
+        self._date = datetime(number, date.month, date.day, date.hour, date.minute,
+                              date.second, date.microsecond, date.tzinfo)
         return self
 
     def month(self, number):
+        """Mutate the original moment by changing the month."""
+        if number < 0:
+            return self.subtract('months', abs(number))
+        date = self._date
+        self._date = datetime(date.year, number, date.day, date.hour, date.minute,
+                              date.second, date.microsecond, date.tzinfo)
         return self
 
-    def date(self, number):
+    def day(self, number):
         """Mutate the original moment by changing the day of the month."""
+        if number < 0:
+            return self.subtract('days', abs(number))
+        date = self._date
+        self._date = datetime(date.year, date.month, number, date.hour, date.minute,
+                              date.second, date.microsecond, date.tzinfo)
         return self
 
     def weekday(self, number):
         """Mutate the original moment by changing the day of the week."""
         return self
 
-    def hours(self, amount):
+    def hours(self, number):
+        """Mutate the original moment by changing the hour."""
+        if number < 0:
+            return self.subtract('hours', abs(number))
+        date = self._date
+        self._date = datetime(date.year, date.month, date.day, number, date.minute,
+                              date.second, date.microsecond, date.tzinfo)
         return self
 
-    def minutes(self, amount):
+    def minutes(self, number):
+        """Mutate the original moment by changing the minutes."""
+        if number < 0:
+            return self.subtract('minutes', abs(number))
+        date = self._date
+        self._date = datetime(date.year, date.month, date.day, date.hour, number,
+                              date.second, date.microsecond, date.tzinfo)
         return self
 
-    def seconds(self, amount):
+    def seconds(self, number):
+        """Mutate the original moment by changing the seconds."""
+        if number < 0:
+            return self.subtract('seconds', abs(number))
+        date = self._date
+        self._date = datetime(date.year, date.month, date.day, date.hour, date.minute,
+                              number, date.microsecond, date.tzinfo)
         return self
 
-    def milliseconds(self, amount):
-        """Add milliseconds to the original moment."""
+    def microseconds(self, number):
+        """Mutate the original moment by changing the seconds."""
+        if number < 0:
+            return self.subtract('microseconds', abs(number))
+        date = self._date
+        self._date = datetime(date.year, date.month, date.day, date.hour, date.minute,
+                              date.second, number, date.tzinfo)
         return self
 
     def datetime(self):

@@ -39,46 +39,6 @@ class Moment(MutableDate):
             self._date = datetime.fromtimestamp(timestamp)
         return self
 
-    def add(self, key, amount):
-        """Add time to the original moment."""
-        if key == 'years':
-            self._date = add_month(self._date, amount * 12)
-        elif key == 'months':
-            self._date = add_month(self._date, amount)
-        elif key == 'weeks':
-            self._date += timedelta(weeks=amount)
-        elif key == 'days':
-            self._date += timedelta(days=amount)
-        elif key == 'minutes':
-            self._date += timedelta(minutes=amount)
-        elif key == 'seconds':
-            self._date += timedelta(seconds=amount)
-        elif key == 'milliseconds':
-            self._date += timedelta(milliseconds=amount)
-        elif key == 'microseconds':
-            self._date += timedelta(microseconds=amount)
-        return self
-
-    def subtract(self, key, amount):
-        """Subtract time from the original moment."""
-        if key == 'years':
-            self._date = subtract_month(self._date, amount * 12)
-        elif key == 'months':
-            self._date = subtract_month(self._date, amount)
-        elif key == 'weeks':
-            self._date -= timedelta(weeks=amount)
-        elif key == 'days':
-            self._date -= timedelta(days=amount)
-        elif key == 'minutes':
-            self._date -= timedelta(minutes=amount)
-        elif key == 'seconds':
-            self._date -= timedelta(seconds=amount)
-        elif key == 'milliseconds':
-            self._date -= timedelta(milliseconds=amount)
-        elif key == 'microseconds':
-            self._date -= timedelta(microseconds=amount)
-        return self
-
     def timezone(self, zone=None):
         """Explicitly set the time zone you want to work with."""
         if not zone:

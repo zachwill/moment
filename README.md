@@ -71,4 +71,10 @@ moment.date([2012, 12, 18]).add('days', 2).subtract('weeks', 3).to_date()
 
 # Imagine trying to do this with datetime, right?
 moment.utcnow().add('years', 3).add('months', 2).format('YYYY-M-D h:m A')
+
+# In addition to adding/subtracting, we can also set values
+moment.now().hours(5).minutes(15).seconds(0).epoch()
+
+# And, if you'd prefer to keep the microseconds on your epoch value
+moment.now().hours(5).minutes(15).seconds(0).epoch(False)
 ```
