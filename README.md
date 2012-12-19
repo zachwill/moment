@@ -53,7 +53,7 @@ moment.date(datetime(2012, 12, 18)).timezone('US/Central')
 # Alter the moment's datetime with a different locale
 moment.utcnow().locale('US/Eastern').to_date()
 
-# Create and format a moment using JavaScript semantics
+# Create and format a moment using Moment.js semantics
 moment.now().format('YYYY-M-D')
 
 # Create and format a moment with strftime semantics
