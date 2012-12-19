@@ -45,4 +45,10 @@ moment.date([2012, 12, 18]).to_date()
 
 # Update your moment to a different time zone
 moment.date(datetime(2012, 12, 18)).timezone("America/Chicago")
+
+# Create and format a moment using JavaScript semantics
+moment.now().format('YYYY-M-D')
+
+# Create and format a moment with strftime semantics
+moment.now().strftime('%Y-%m-%d')
 ```

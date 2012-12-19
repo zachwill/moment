@@ -3,7 +3,7 @@ from datetime import datetime
 import pytz
 import times
 from .date import MutableDate
-from .parse import parse_date_and_formula
+from .parse import parse_date_and_formula, parse_js_date
 
 
 class Moment(MutableDate):
@@ -67,11 +67,12 @@ class Moment(MutableDate):
 
     def format(self, formula):
         """Display the moment in a given format."""
-        return "format"
+        formula = parse_js_date(formula)
+        return self._date.strftime(formula)
 
     def strftime(self, formula):
         """Takes a Pythonic format, rather than the JS version."""
-        return "format"
+        return self._date.strftime(formula)
 
     def diff(self, moment, measurement=None):
         return self
