@@ -1,3 +1,4 @@
+from calendar import timegm
 from datetime import datetime
 
 import pytz
@@ -13,7 +14,6 @@ class Moment(MutableDate):
         date, formula = parse_date_and_formula(date, formula)
         self._date = date
         self._formula = formula
-        self._local = False
 
     def now(self, utc=False):
         if utc:
@@ -45,8 +45,8 @@ class Moment(MutableDate):
         return self
 
     def local(self):
-        """Toggle a flag on the original moment to internally use UTC."""
-        self._local = not self._local
+        """Turn your UTC datetime into a local time zone datetime."""
+        self._date = datetime.fromtimestamp(timegm(self._date.timetuple()))
         return self
 
     def timezone(self, zone):
