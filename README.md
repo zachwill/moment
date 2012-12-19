@@ -63,7 +63,9 @@ Chaining
 Moment allows you to chain commands, which turns out to be super useful.
 
 ```python
+# Customize your moment by chaining commands
 moment.date([2012, 12, 18]).add('days', 2).subtract('weeks', 3).to_date()
 
-moment.utcnow().add('years', 3).subtract('months', 2).add('days', 1).to_date()
+# Imagine trying to do this with datetime, right?
+moment.utcnow().add('years', 3).subtract('months', 2).format('YYYY-M-D')
 ```
