@@ -1,3 +1,19 @@
+from datetime import datetime
+
+
+def parse_date_and_formula(date, formula):
+    """Doesn't need to be part of core Moment class."""
+    if date and formula:
+        if '%' not in formula:
+            formula = parse_js_date(formula)
+        date = datetime.strptime(date, formula)
+    elif isinstance(date, list) or isinstance(date, tuple):
+        date = datetime(*date)
+    elif formula is None:
+        formula = "%Y-%m-%d"
+    return date, formula
+
+
 def parse_js_date(date):
     """
     Translate the easy-to-use JavaScript format strings to Python's cumbersome

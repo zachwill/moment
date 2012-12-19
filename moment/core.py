@@ -1,25 +1,19 @@
-import calendar
 from datetime import datetime
 
 import pytz
 import times
 from .date import MutableDate
-from .parse import parse_js_date
+from .parse import parse_date_and_formula
 
 
 class Moment(MutableDate):
     """A class to abstract date difficulties."""
 
     def __init__(self, date=None, formula=None):
-        if date and formula:
-            if '%' not in formula:
-                formula = parse_js_date(formula)
-            date = datetime.strptime(date, formula)
-        elif isinstance(date, list) or isinstance(date, tuple):
-            date = datetime(*date)
+        date, formula = parse_date_and_formula(date, formula)
         self._date = date
-        self._local = False
         self._formula = formula
+        self._local = False
 
     def now(self, utc=False):
         if utc:
@@ -29,13 +23,9 @@ class Moment(MutableDate):
         return self
 
     def utc(self, date=None, formula=None):
-        if date and formula:
-            if '%' not in formula:
-                formula = parse_js_date(formula)
-            date = datetime.strptime(date, formula)
-        elif isinstance(date, list) or isinstance(date, tuple):
-            date = datetime(*date)
+        date, formula = parse_date_and_formula(date, formula)
         self._date = pytz.timezone('UTC').localize(date)
+        self._formula = formula
         return self
 
     def unix(self, timestamp, utc=False):
@@ -87,10 +77,6 @@ class Moment(MutableDate):
         return self
 
     def __repr__(self):
-        if self._formula is not None:
-            formula = self._formula
-        else:
-            formula = "%m-%d-%Y, %l:%m %p"
         if self._date is not None:
-            return "<Moment(%s)>" % (self._date.strftime(formula))
+            return "<Moment(%s)>" % (self._date.strftime(self._formula))
         return "<Moment>"
