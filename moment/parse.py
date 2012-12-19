@@ -8,8 +8,11 @@ def parse_date_and_formula(date, formula):
             formula = parse_js_date(formula)
         date = datetime.strptime(date, formula)
     elif isinstance(date, list) or isinstance(date, tuple):
+        if len(date) == 1:
+            # Python datetime needs the month and day, too.
+            date = [date[0], 1, 1]
         date = datetime(*date)
-    elif formula is None:
+    if formula is None:
         formula = "%Y-%m-%d"
     return date, formula
 
