@@ -1,9 +1,9 @@
 moment
 ======
 
-A Python library for dates/times inspired by [Moment.js](http://momentjs.com/docs/)
-and the simplicity of Kenneth Reitz's [requests](http://docs.python-requests.org/)
-library.
+A Python library for dates/times. Inspired by both
+[Moment.js](http://momentjs.com/docs/) and the simplicity of Kenneth Reitz's
+[requests](http://docs.python-requests.org/) library.
 
 
 Installation
