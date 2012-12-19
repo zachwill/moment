@@ -9,16 +9,17 @@ from datetime import  datetime, timedelta
 def add_month(date, number):
     """Add a number of months to a date."""
     month = date.month - 1 + number
-    year = date.year + month / 12
-    month = month % 12 + 1
-    day = min(date.day, calendar.monthrange(year, month)[1])
-    return datetime(year, month, day, date.hour, date.minute, date.second,
-                    date.microsecond, date.tzinfo)
+    return update_month(date, month)
 
 
 def subtract_month(date, number):
     """Subtract a number of months from a date."""
     month = date.month - 1 - number
+    return update_month(date, month)
+
+
+def update_month(date, month):
+    """Create a new date with a modified number of months."""
     year = date.year + month / 12
     month = month % 12 + 1
     day = min(date.day, calendar.monthrange(year, month)[1])
