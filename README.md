@@ -47,8 +47,11 @@ moment.unix(1355875153626, utc=True)
 # Return a datetime instance
 moment.date([2012, 12, 18]).to_date()
 
-# Update your moment to a different time zone
-moment.date(datetime(2012, 12, 18)).timezone("America/Chicago")
+# Update your moment's time zone
+moment.date(datetime(2012, 12, 18)).timezone('US/Central')
+
+# Alter the moment's datetime with a different locale
+moment.utcnow().locale('US/Eastern').to_date()
 
 # Create and format a moment using JavaScript semantics
 moment.now().format('YYYY-M-D')
