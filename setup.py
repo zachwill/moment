@@ -19,6 +19,9 @@ setup(
     packages=[
         'moment'
     ],
+    install_requires=[
+        'times'
+    ],
     license='MIT',
     classifiers=[
         'Development Status :: 1 - Planning',

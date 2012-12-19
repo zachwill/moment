@@ -1,5 +1,8 @@
 import calendar
 from datetime import datetime
+
+import pytz
+import times
 from .date import MutableDate
 from .parse import parse_js_date
 
@@ -18,11 +21,21 @@ class Moment(MutableDate):
         self._local = False
         self._formula = formula
 
-    def now(self):
-        self._date = datetime.now()
+    def now(self, utc=False):
+        if utc:
+            self._date = pytz.timezone('UTC').localize(datetime.utcnow())
+        else:
+            self._date = datetime.now()
         return self
 
     def utc(self, date=None, formula=None):
+        if date and formula:
+            if '%' not in formula:
+                formula = parse_js_date(formula)
+            date = datetime.strptime(date, formula)
+        elif isinstance(date, list) or isinstance(date, tuple):
+            date = datetime(*date)
+        self._date = pytz.timezone('UTC').localize(date)
         return self
 
     def unix(self, timestamp, utc=False):
@@ -44,6 +57,22 @@ class Moment(MutableDate):
     def local(self):
         """Toggle a flag on the original moment to internally use UTC."""
         self._local = not self._local
+        return self
+
+    def timezone(self, zone):
+        """Explicitly set the time zone you want to work with."""
+        try:
+            self._date = pytz.timezone(zone).localize(self._date)
+        except ValueError:
+            self._date = self._date.replace(tzinfo=pytz.timezone(zone))
+        return self
+
+    def to_zone(self, zone):
+        """Change the time zone and affect the current moment's time."""
+        try:
+            times.to_local(times.to_universal(self._date), zone)
+        except:
+            times.to_local(self._date, zone)
         return self
 
     def format(self, formula):

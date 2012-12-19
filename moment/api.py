@@ -10,9 +10,9 @@ def date(time, formula=None):
     return Moment(time, formula)
 
 
-def now():
+def now(utc=False):
     """Create a date from the present time."""
-    return Moment().now()
+    return Moment().now(utc)
 
 
 def utc(date=None, formula=None):
