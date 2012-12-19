@@ -58,7 +58,7 @@ class Moment(MutableDate):
         if self._formula is not None:
             formula = self._formula
         else:
-            formula = "%R"
+            formula = "%m-%d-%Y, %l:%m %p"
         if self._date is not None:
             return "<Moment(%s)>" % (self._date.strftime(formula))
         return "<Moment>"
