@@ -70,5 +70,5 @@ Moment allows you to chain commands, which turns out to be super useful.
 moment.date([2012, 12, 18]).add('days', 2).subtract('weeks', 3).to_date()
 
 # Imagine trying to do this with datetime, right?
-moment.utcnow().add('years', 3).subtract('months', 2).format('YYYY-M-D')
+moment.utcnow().add('years', 3).add('months', 2).format('YYYY-M-D h:m A')
 ```
