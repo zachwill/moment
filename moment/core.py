@@ -3,6 +3,7 @@ from datetime import datetime
 
 import pytz
 import times
+
 from .date import MutableDate, add_month
 from .parse import parse_date_and_formula, parse_js_date
 
@@ -40,7 +41,7 @@ class Moment(MutableDate):
 
     def add(self, key, amount):
         """Add time to the original moment."""
-        if key == 'months' or key == 'month':
+        if key == 'months':
             date = add_month(self._date, amount)
             self._date = date
         return self
