@@ -54,5 +54,16 @@ moment.date(datetime(2012, 12, 18)).timezone("America/Chicago")
 moment.now().format('YYYY-M-D')
 
 # Create and format a moment with strftime semantics
-moment.date((2012, 12, 21)).strftime('%Y-%m-%d')
+moment.date((2012, 12, 18)).strftime('%Y-%m-%d')
+```
+
+Chaining
+--------
+
+Moment allows you to chain commands, which turns out to be super useful.
+
+```python
+moment.date([2012, 12, 18]).add('days', 2).subtract('weeks', 3).to_date()
+
+moment.utcnow().add('years', 3).subtract('months', 2).add('days', 1).to_date()
 ```
