@@ -16,6 +16,16 @@ def add_month(date, number):
                     date.microsecond, date.tzinfo)
 
 
+def subtract_month(date, number):
+    """Subtract a number of months from a date."""
+    month = date.month - 1 - number
+    year = date.year + month / 12
+    month = month % 12 + 1
+    day = min(date.day, calendar.monthrange(year, month)[1])
+    return datetime(year, month, day, date.hour, date.minute, date.second,
+                    date.microsecond, date.tzinfo)
+
+
 class MutableDate(object):
     """Incapsulate mutable dates in one class."""
 
