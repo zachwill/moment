@@ -21,6 +21,7 @@ Usage
 
 ```python
 import moment
+from datetime import datetime
 
 # Create a moment from a string
 moment.date("12-18-2012", "M-D-YYYY")
