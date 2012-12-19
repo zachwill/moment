@@ -2,7 +2,7 @@ moment
 ======
 
 A Python library for dates/times inspired by [Moment.js](http://momentjs.com/docs/)
-and the simplicity of Kenneth Reitz's [requests](http://python-requests.org/)
+and the simplicity of Kenneth Reitz's [requests](http://docs.python-requests.org/)
 library.
 
 
@@ -22,7 +22,7 @@ import moment
 moment.date("12-18-2012", "M-D-YYYY")
 
 # Create a moment with strftime format
-moment.date("12-18-2012", "%m-%e-%Y")
+moment.date("12-18-2012", "%m-%d-%Y")
 
 # Create a moment from the current datetime
 moment.now()
