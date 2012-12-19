@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pytz
 import times
-from .date import MutableDate
+from .date import MutableDate, add_month
 from .parse import parse_date_and_formula, parse_js_date
 
 
@@ -15,17 +15,19 @@ class Moment(MutableDate):
         self._date = date
         self._formula = formula
 
-    def now(self, utc=False):
-        if utc:
-            self._date = pytz.timezone('UTC').localize(datetime.utcnow())
-        else:
-            self._date = datetime.now()
+    def now(self):
+        self._date = datetime.now()
         return self
 
     def utc(self, date=None, formula=None):
         date, formula = parse_date_and_formula(date, formula)
         self._date = pytz.timezone('UTC').localize(date)
         self._formula = formula
+        return self
+
+    def utcnow(self):
+        """UTC equivalent to now."""
+        self._date = pytz.timezone('UTC').localize(datetime.utcnow())
         return self
 
     def unix(self, timestamp, utc=False):
@@ -38,6 +40,9 @@ class Moment(MutableDate):
 
     def add(self, key, amount):
         """Add time to the original moment."""
+        if key == 'months' or key == 'month':
+            date = add_month(self._date, amount)
+            self._date = date
         return self
 
     def subtract(self, key, amount):

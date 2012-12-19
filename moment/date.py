@@ -2,7 +2,18 @@
 Where the magic happens.
 """
 
+import calendar
 from datetime import  datetime
+
+
+def add_month(date, number):
+    """Add a number of months to a date."""
+    month = date.month - 1 + number
+    year = date.year + month / 12
+    month = month % 12 + 1
+    day = min(date.day, calendar.monthrange(year, month)[1])
+    return datetime(year, month, day, date.hour, date.minute, date.second,
+                    date.microsecond, date.tzinfo)
 
 
 class MutableDate(object):
