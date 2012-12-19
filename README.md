@@ -9,6 +9,9 @@ A Python library for dates/times. Inspired by both
 Installation
 ------------
 
+This is extremely alpha software right now. Eventually you'll be able to install
+it with:
+
 `pip install moment`
 
 
