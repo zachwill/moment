@@ -40,8 +40,8 @@ moment.unix(1355875153626)
 # Create a moment from a Unix UTC timestamp
 moment.unix(1355875153626, utc=True)
 
-# Update your moment to the correct UTC time
-moment.date([2012, 12, 18]).local().to_date()
+# Return a datetime instance
+moment.date([2012, 12, 18]).to_date()
 
 # Update your moment to a different time zone
 moment.date(datetime(2012, 12, 18)).timezone("America/Chicago")
