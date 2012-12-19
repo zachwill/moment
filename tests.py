@@ -37,6 +37,10 @@ class SimpleAPI(TestCase):
         self.assertEquals(d.hour, now.hour)
         self.assertEquals(d.second, now.second)
 
+    def test_moment_can_transfer_between_datetime_and_moment(self):
+        d = moment.now().to_date()
+        self.assertEquals(d, moment.date(d).to_date())
+
 
 if __name__ == '__main__':
     main()

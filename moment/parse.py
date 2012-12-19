@@ -40,9 +40,9 @@ def parse_js_date(date):
         date = date.replace('h', '%l')
     # Minutes
     if 'mm' in date:
-        date = date.replace('mm', '%M')
+        date = date.replace('mm', '%min')
     elif 'm' in date:
-        date = date.replace('m', '%M')
+        date = date.replace('m', '%min')
     # Seconds
     if 'ss' in date:
         date = date.replace('ss', '%S')
@@ -84,4 +84,7 @@ def parse_js_date(date):
         date = date.replace('DD', '%d')
     elif 'D' in date:
         date = date.replace('D', '%d')
+    # A necessary evil right now...
+    if '%min' in date:
+        date = date.replace('%min', '%M')
     return date
