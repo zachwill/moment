@@ -26,6 +26,16 @@ class SimpleAPI(TestCase):
         self.assertEquals(d.month, now.month)
         self.assertEquals(d.day, now.day)
         self.assertEquals(d.hour, now.hour)
+        self.assertEquals(d.second, now.second)
+
+    def test_utcnow_function(self):
+        d = moment.utcnow().to_date()
+        now = datetime.utcnow()
+        self.assertEquals(d.year, now.year)
+        self.assertEquals(d.month, now.month)
+        self.assertEquals(d.day, now.day)
+        self.assertEquals(d.hour, now.hour)
+        self.assertEquals(d.second, now.second)
 
 
 if __name__ == '__main__':
