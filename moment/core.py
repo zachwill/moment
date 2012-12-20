@@ -76,9 +76,13 @@ class Moment(MutableDate):
     def diff(self, moment, measurement=None):
         return self
 
+    def done(self):
+        """Return the datetime representation."""
+        return self._date
+
     def clone(self):
         """Return a clone of the current moment."""
-        return Moment(self.to_date())
+        return Moment(self.done())
 
     def __repr__(self):
         if self._date is not None:
