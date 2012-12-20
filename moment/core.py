@@ -39,7 +39,7 @@ class Moment(MutableDate):
             self._date = datetime.fromtimestamp(timestamp)
         return self
 
-    def timezone(self, zone=None):
+    def locale(self, zone=None):
         """Explicitly set the time zone you want to work with."""
         if not zone:
             self._date = datetime.fromtimestamp(timegm(self._date.timetuple()))
@@ -50,8 +50,11 @@ class Moment(MutableDate):
                 self._date = self._date.replace(tzinfo=pytz.timezone(zone))
         return self
 
-    def locale(self, zone):
-        """Change the time zone and affect the current moment's time."""
+    def timezone(self, zone):
+        """
+        Change the time zone and affect the current moment's time. Note, a
+        locality must already be set.
+        """
         date = self._date
         try:
             date = times.to_local(times.to_universal(date), zone)

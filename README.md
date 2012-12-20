@@ -48,10 +48,18 @@ moment.unix(1355875153626, utc=True)
 moment.date([2012, 12, 18]).to_date()
 
 # Update your moment's time zone
-moment.date(datetime(2012, 12, 18)).timezone('US/Central')
+moment.date(datetime(2012, 12, 18)).locale('US/Central')
 
 # Alter the moment's datetime with a different locale
-moment.utcnow().locale('US/Eastern').to_date()
+moment.utcnow().timezone('US/Eastern').to_date()
+
+# Set and update your moment's time zone to a new locale. For instance,
+# I'm in SF but want NYC's current time.
+moment.now().locale('US/Pacific').timezone('US/Eastern').datetime()
+
+# In order to manipulate time zones, a locale must always be set or
+# you must be using UTC.
+moment.utcnow().timezone('US/Eastern').to_date()
 
 # Create and format a moment using Moment.js semantics
 moment.now().format('YYYY-M-D')
