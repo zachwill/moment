@@ -69,6 +69,10 @@ moment.now().locale('US/Pacific').timezone('US/Eastern').done()
 # In order to manipulate time zones, a locale must always be set or
 # you must be using UTC.
 moment.utcnow().timezone('US/Eastern').done()
+
+# You can also clone a moment, so the original stays unaltered
+now = moment.utcnow().timezone('US/Pacific')
+future = now.clone().add('weeks', 2)
 ```
 
 Chaining
