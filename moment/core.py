@@ -73,6 +73,10 @@ class Moment(MutableDate):
     def diff(self, moment, measurement=None):
         return self
 
+    def clone(self):
+        """Return a clone of the current moment."""
+        return Moment(self.to_date())
+
     def __repr__(self):
         if self._date is not None:
             return "<Moment(%s)>" % (self._date.strftime(self._formula))

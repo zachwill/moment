@@ -111,6 +111,13 @@ class MutableDate(object):
 
     def weekday(self, number):
         """Mutate the original moment by changing the day of the week."""
+        weekday = self._date.isoweekday()
+        if number < 0:
+            days = abs(weekday - number)
+        else:
+            days = weekday - number
+        delta = self._date - timedelta(days)
+        self._date = delta
         return self
 
     def hours(self, number):
