@@ -66,7 +66,7 @@ moment.utcnow().timezone('US/Eastern').to_date()
 
 # Set and update your moment's time zone. For instance, I'm in SF
 # but want NYC's current time.
-moment.now().locale('US/Pacific').timezone('US/Eastern').done()
+moment.now().locale('US/Pacific').timezone('US/Eastern')
 
 # In order to manipulate time zones, a locale must always be set or
 # you must be using UTC.
