@@ -95,6 +95,12 @@ moment.now().hours(5).minutes(15).seconds(0).epoch()
 # And, if you'd prefer to keep the microseconds on your epoch value
 moment.now().hours(5).minutes(15).seconds(0).epoch(False)
 
+# Years, months, and days can also be set
+moment.now().years(1984).months(1).days(1).hours(0).minutes(0).seconds(0)
+
+# Why are the methods plural? Because datetime properties are available.
+moment.utc((2012, 12, 19)).year == 2012
+
 # We can also manipulate to preferred weekdays, such as Monday
 moment.date((2012, 12, 19)).weekday(1).strftime('%Y-%m-%d')
 
