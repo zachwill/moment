@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name="moment",
-    version="0.0.8",
+    version="0.0.9",
     url="http://github.com/zachwill/moment",
     author="Zach Williams",
     author_email="hey@zachwill.com",
