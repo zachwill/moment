@@ -42,6 +42,21 @@ class SimpleAPI(TestCase):
         self.assertEquals(d, moment.date(d).to_date())
 
 
+class Chaining(TestCase):
+
+    def test_simple_chaining_commands(self):
+        d = moment.date([2012, 12, 18])
+        expecting = moment.date((2012, 12, 18, 1, 2, 3)).done()
+        d.hours(1).minutes(2).seconds(3)
+        self.assertEqual(d.done(), expecting)
+
+    def test_chaining_with_format(self):
+        d = moment.utc((2012, 12, 18))
+        expecting = "2012-12-18 01:02:03"
+        d.hours(1).add('minutes', 2).seconds(3)
+        self.assertEquals(d.format('YYYY-MM-DD hh:mm:ss'), expecting)
+
+
 class Weekdays(TestCase):
 
     def test_weekdays_can_be_manipulated(self):
