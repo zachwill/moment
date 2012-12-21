@@ -43,6 +43,8 @@ class MutableDate(object):
             self._date += timedelta(weeks=amount)
         elif key == 'days':
             self._date += timedelta(days=amount)
+        elif key == 'hours':
+            self._date += timedelta(hours=amount)
         elif key == 'minutes':
             self._date += timedelta(minutes=amount)
         elif key == 'seconds':
@@ -63,6 +65,8 @@ class MutableDate(object):
             self._date -= timedelta(weeks=amount)
         elif key == 'days':
             self._date -= timedelta(days=amount)
+        elif key == 'hours':
+            self._date -= timedelta(hours=amount)
         elif key == 'minutes':
             self._date -= timedelta(minutes=amount)
         elif key == 'seconds':
