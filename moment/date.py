@@ -153,3 +153,39 @@ class MutableDate(object):
     def to_date(self):
         """Return the mutable date's inner datetime format."""
         return self._date
+
+    def __lt__(self, other):
+        if isinstance(other, datetime):
+            return self._date < other
+        elif isinstance(other, type(self)):
+            return self._date < other.to_date()
+
+    def __le__(self, other):
+        if isinstance(other, datetime):
+            return self._date <= other
+        elif isinstance(other, type(self)):
+            return self._date <= other.to_date()
+
+    def __eq__(self, other):
+        if isinstance(other, datetime):
+            return self._date == other
+        elif isinstance(other, type(self)):
+            return self._date == other.to_date()
+
+    def __ne__(self, other):
+        if isinstance(other, datetime):
+            return self._date != other
+        elif isinstance(other, type(self)):
+            return self._date != other.to_date()
+
+    def __gt__(self, other):
+        if isinstance(other, datetime):
+            return self._date > other
+        elif isinstance(other, type(self)):
+            return self._date > other.to_date()
+
+    def __ge__(self, other):
+        if isinstance(other, datetime):
+            return self._date >= other
+        elif isinstance(other, type(self)):
+            return self._date >= other.to_date()
