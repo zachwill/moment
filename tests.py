@@ -56,6 +56,10 @@ class Chaining(TestCase):
         expecting = "2012-12-18 01:02:03"
         self.assertEquals(d.format('YYYY-MM-DD hh:mm:ss'), expecting)
 
+    def test_properties_after_chaining(self):
+        d = moment.now().years(1984).months(1).days(1)
+        self.assertEquals(d.year, 1984)
+
 
 class Weekdays(TestCase):
 
