@@ -65,6 +65,18 @@ class Chaining(TestCase):
         d = moment.now().years(1984).months(1).days(1)
         self.assertEquals(d.year, 1984)
 
+    def test_add_with_keywords(self):
+        d = moment.date((2012, 12, 19))
+        d.add(hours=1, minutes=2, seconds=3)
+        expecting = moment.date((2012, 12, 19, 1, 2, 3))
+        self.assertEquals(d, expecting)
+
+    def test_subtract_with_keywords(self):
+        d = moment.date((2012, 12, 19, 1, 2, 3))
+        d.subtract(hours=1, minutes=2, seconds=3)
+        expecting = moment.date((2012, 12, 19))
+        self.assertEquals(d, expecting)
+
 
 class Weekdays(TestCase):
 

@@ -33,8 +33,11 @@ class MutableDate(object):
     def __init__(self, date):
         self._date = date
 
-    def add(self, key, amount):
+    def add(self, key=None, amount=None, **kwds):
         """Add time to the original moment."""
+        if not key and not amount and len(kwds):
+            for k, v in kwds.iteritems():
+                self.add(k, v)
         if key == 'years':
             self._date = add_month(self._date, amount * 12)
         elif key == 'months':
@@ -55,8 +58,11 @@ class MutableDate(object):
             self._date += timedelta(microseconds=amount)
         return self
 
-    def subtract(self, key, amount):
+    def subtract(self, key=None, amount=None, **kwds):
         """Subtract time from the original moment."""
+        if not key and not amount and len(kwds):
+            for k, v in kwds.iteritems():
+                self.subtract(k, v)
         if key == 'years':
             self._date = subtract_month(self._date, amount * 12)
         elif key == 'months':
