@@ -81,7 +81,7 @@ class MutableDate(object):
         """Milliseconds since epoch."""
         zero = datetime.utcfromtimestamp(0)
         delta = self._date - zero
-        seconds = delta.total_seconds() * 1000
+        seconds = delta.total_seconds()
         if rounding:
             seconds = round(seconds)
         return seconds

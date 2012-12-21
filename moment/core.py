@@ -34,9 +34,15 @@ class Moment(MutableDate):
     def unix(self, timestamp, utc=False):
         """Create a date from a Unix timestamp."""
         if utc:
-            self._date = datetime.utcfromtimestamp(timestamp)
+            fromtimestamp = datetime.utcfromtimestamp
         else:
-            self._date = datetime.fromtimestamp(timestamp)
+            fromtimestamp = datetime.fromtimestamp
+        try:
+            # Seconds since epoch
+            self._date = fromtimestamp(timestamp)
+        except ValueError:
+            # Milliseconds since epoch
+            self._date = fromtimestamp(timestamp / 1000)
         return self
 
     def locale(self, zone=None):

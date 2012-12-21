@@ -41,6 +41,11 @@ class SimpleAPI(TestCase):
         d = moment.now().to_date()
         self.assertEquals(d, moment.date(d).to_date())
 
+    def test_moment_unix_command(self):
+        d = moment.unix(1355817600000)
+        expected = moment.date((2012, 12, 18))
+        self.assertEquals(d, expected)
+
 
 class Chaining(TestCase):
 
