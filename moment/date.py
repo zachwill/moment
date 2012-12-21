@@ -86,21 +86,21 @@ class MutableDate(object):
             seconds = round(seconds)
         return seconds
 
-    def year(self, number):
+    def years(self, number):
         """Mutate the original moment by changing the year."""
         if number < 0:
             return self.subtract('years', abs(number))
         self._date = self._date.replace(year=number)
         return self
 
-    def month(self, number):
+    def months(self, number):
         """Mutate the original moment by changing the month."""
         if number < 0:
             return self.subtract('months', abs(number))
         self._date = self._date.replace(month=number)
         return self
 
-    def day(self, number):
+    def days(self, number):
         """Mutate the original moment by changing the day of the month."""
         if number < 0:
             return self.subtract('days', abs(number))
@@ -153,6 +153,34 @@ class MutableDate(object):
     def to_date(self):
         """Return the mutable date's inner datetime format."""
         return self._date
+
+    @property
+    def year(self):
+        return self._date.year
+
+    @property
+    def month(self):
+        return self._date.month
+
+    @property
+    def day(self):
+        return self._date.day
+
+    @property
+    def hour(self):
+        return self._date.hour
+
+    @property
+    def minute(self):
+        return self._date.minute
+
+    @property
+    def second(self):
+        return self._date.second
+
+    @property
+    def microsecond(self):
+        return self._date.microsecond
 
     def __lt__(self, other):
         if isinstance(other, datetime):

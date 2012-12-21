@@ -9,15 +9,15 @@ class SimpleAPI(TestCase):
 
     def test_date_function_takes_a_string(self):
         d = moment.date("December 18, 2012", "MMMM D, YYYY")
-        self.assertEquals(d.to_date(), datetime(2012, 12, 18))
+        self.assertEquals(d, datetime(2012, 12, 18))
 
     def test_date_function_with_datetime(self):
         d = moment.date(datetime(2012, 12, 18))
-        self.assertEquals(d.datetime(), datetime(2012, 12, 18))
+        self.assertEquals(d, datetime(2012, 12, 18))
 
     def test_date_function_with_iterable(self):
         d = moment.date((2012, 12, 18))
-        self.assertEquals(d.datetime(), datetime(2012, 12, 18))
+        self.assertEquals(d, datetime(2012, 12, 18))
 
     def test_now_function_with_current_date(self):
         d = moment.now().to_date()
@@ -29,7 +29,7 @@ class SimpleAPI(TestCase):
         self.assertEquals(d.second, now.second)
 
     def test_utcnow_function(self):
-        d = moment.utcnow().to_date()
+        d = moment.utcnow()
         now = datetime.utcnow()
         self.assertEquals(d.year, now.year)
         self.assertEquals(d.month, now.month)
@@ -48,12 +48,12 @@ class Chaining(TestCase):
         d = moment.date([2012, 12, 18])
         expecting = moment.date((2012, 12, 18, 1, 2, 3)).done()
         d.hours(1).minutes(2).seconds(3)
-        self.assertEqual(d.done(), expecting)
+        self.assertEqual(d, expecting)
 
     def test_chaining_with_format(self):
         d = moment.utc((2012, 12, 18))
-        expecting = "2012-12-18 01:02:03"
         d.hours(1).add('minutes', 2).seconds(3)
+        expecting = "2012-12-18 01:02:03"
         self.assertEquals(d.format('YYYY-MM-DD hh:mm:ss'), expecting)
 
 
@@ -63,25 +63,25 @@ class Weekdays(TestCase):
         d = moment.date([2012, 12, 19])
         yesterday = moment.date([2012, 12, 18])
         self.assertEquals(d.to_date().isoweekday(), 3)
-        self.assertEquals(d.weekday(3).to_date(), d.done())
-        self.assertEquals(d.weekday(2).to_date(), yesterday.done())
+        self.assertEquals(d.weekday(3), d)
+        self.assertEquals(d.weekday(2).done(), yesterday.done())
 
     def test_week_addition_equals_weekday_manipulation(self):
         d = moment.date([2012, 12, 19])
         upcoming = d.clone().add('weeks', 1)
         expecting = moment.date([2012, 12, 26]).to_date()
-        self.assertEquals(upcoming.to_date(), expecting)
-        self.assertEquals(d.weekday(10).to_date(), upcoming.to_date())
+        self.assertEquals(upcoming, expecting)
+        self.assertEquals(d.weekday(10), upcoming)
 
     def test_weekdays_with_zeros(self):
         d = moment.date([2012, 12, 19])
-        sunday = moment.date([2012, 12, 16]).to_date()
-        self.assertEquals(d.weekday(0).done(), sunday)
+        sunday = moment.date([2012, 12, 16])
+        self.assertEquals(d.weekday(0), sunday)
 
     def test_weekdays_with_negative_numbers(self):
         d = moment.date((2012, 12, 19))
         expecting = moment.date([2012, 12, 9]).to_date()
-        self.assertEquals(d.weekday(-7).to_date(), expecting)
+        self.assertEquals(d.weekday(-7), expecting)
 
     def test_weekdays_with_larger_number_into_new_year(self):
         d = moment.date((2012, 12, 19))
