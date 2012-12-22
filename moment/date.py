@@ -86,13 +86,15 @@ class MutableDate(object):
             self._date -= timedelta(microseconds=amount)
         return self
 
-    def epoch(self, rounding=True):
+    def epoch(self, rounding=True, milliseconds=False):
         """Milliseconds since epoch."""
         zero = datetime.utcfromtimestamp(0)
         delta = self._date - zero
         seconds = delta.total_seconds()
         if rounding:
             seconds = round(seconds)
+        if milliseconds:
+            seconds *= 1000
         return seconds
 
     def years(self, number):

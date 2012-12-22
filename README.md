@@ -99,7 +99,7 @@ moment.date([2012, 12, 19, 1, 2, 3]).subtract(hours=1, minutes=2, seconds=3)
 moment.now().hours(5).minutes(15).seconds(0).epoch()
 
 # And, if you'd prefer to keep the microseconds on your epoch value
-moment.now().hours(5).minutes(15).seconds(0).epoch(False)
+moment.now().hours(5).minutes(15).seconds(0).epoch(rounding=False)
 
 # Years, months, and days can also be set
 moment.now().years(1984).months(1).days(1).hours(0).minutes(0).seconds(0)
