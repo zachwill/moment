@@ -54,6 +54,10 @@ class SimpleAPI(TestCase):
         d = moment.date((2012, 12, 19))
         self.assertTrue(d - datetime(2012, 12, 18))
 
+    def test_a_datetime_can_subtract_a_moment(self):
+        d = moment.date((2012, 12, 18))
+        self.assertTrue(datetime(2012, 12, 19) - d)
+
 
 class Chaining(TestCase):
 

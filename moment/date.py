@@ -23,8 +23,7 @@ def update_month(date, month):
     year = date.year + month / 12
     month = month % 12 + 1
     day = min(date.day, calendar.monthrange(year, month)[1])
-    return datetime(year, month, day, date.hour, date.minute, date.second,
-                    date.microsecond, date.tzinfo)
+    return date.replace(year=year, month=month, day=day)
 
 
 class MutableDate(object):
@@ -205,6 +204,9 @@ class MutableDate(object):
             return self._date - other
         elif isinstance(other, type(self)):
             return self._date - other.to_date()
+
+    def __rsub__(self, other):
+        return self.__sub__(other)
 
     def __lt__(self, other):
         if isinstance(other, datetime):
