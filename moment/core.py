@@ -80,7 +80,7 @@ class Moment(MutableDate):
         return self._date.strftime(formula)
 
     def diff(self, moment, measurement=None):
-        return self
+        return self - moment
 
     def done(self):
         """Return the datetime representation."""

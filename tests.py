@@ -46,6 +46,14 @@ class SimpleAPI(TestCase):
         expected = moment.date((2012, 12, 18))
         self.assertEquals(d, expected)
 
+    def test_moment_can_subtract_another_moment(self):
+        d = moment.date((2012, 12, 19))
+        self.assertTrue(d - moment.date((2012, 12, 18)))
+
+    def test_moment_can_subtract_a_datetime(self):
+        d = moment.date((2012, 12, 19))
+        self.assertTrue(d - datetime(2012, 12, 18))
+
 
 class Chaining(TestCase):
 

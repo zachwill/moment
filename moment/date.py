@@ -58,6 +58,10 @@ class MutableDate(object):
             self._date += timedelta(microseconds=amount)
         return self
 
+    def sub(self, key=None, amount=None, **kwds):
+        """Just in case."""
+        return self.subtract(key, amount, **kwds)
+
     def subtract(self, key=None, amount=None, **kwds):
         """Subtract time from the original moment."""
         if not key and not amount and len(kwds):
@@ -112,6 +116,10 @@ class MutableDate(object):
             return self.subtract('days', abs(number))
         self._date = self._date.replace(day=number)
         return self
+
+    def weekdays(self, number):
+        """Just in case."""
+        return self.weekday(number)
 
     def weekday(self, number):
         """Mutate the original moment by changing the day of the week."""
@@ -187,6 +195,16 @@ class MutableDate(object):
     @property
     def microsecond(self):
         return self._date.microsecond
+
+    @property
+    def tzinfo(self):
+        return self._date.tzinfo
+
+    def __sub__(self, other):
+        if isinstance(other, datetime):
+            return self._date - other
+        elif isinstance(other, type(self)):
+            return self._date - other.to_date()
 
     def __lt__(self, other):
         if isinstance(other, datetime):
