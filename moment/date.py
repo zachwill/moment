@@ -86,6 +86,25 @@ class MutableDate(object):
             self._date -= timedelta(microseconds=amount)
         return self
 
+    def set(self, **kwds):
+        """A Pythonic way to set various date attributes."""
+        for key, value in kwds.iteritems():
+            if key == 'years':
+                self._date = self._date.replace(year=value)
+            elif key == 'months':
+                self._date = self._date.replace(month=value)
+            elif key == 'days':
+                self._date = self._date.replace(day=value)
+            elif key == 'hours':
+                self._date = self._date.replace(hour=value)
+            elif key == 'minutes':
+                self._date = self._date.replace(minute=value)
+            elif key == 'seconds':
+                self._date = self._date.replace(second=value)
+            elif key == 'microseconds':
+                self._date = self._date.replace(microsecond=value)
+        return self
+
     def epoch(self, rounding=True, milliseconds=False):
         """Milliseconds since epoch."""
         zero = datetime.utcfromtimestamp(0)

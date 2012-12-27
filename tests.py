@@ -89,6 +89,12 @@ class Chaining(TestCase):
         expecting = moment.date((2012, 12, 19))
         self.assertEquals(d, expecting)
 
+    def test_chaining_with_set_method(self):
+        d = moment.date((2012, 12, 19))
+        d.set(hours=1, minutes=2, seconds=3)
+        expecting = moment.date((2012, 12, 19, 1, 2, 3))
+        self.assertEquals(d, expecting)
+
 
 class Weekdays(TestCase):
 
