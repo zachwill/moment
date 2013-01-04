@@ -86,22 +86,22 @@ class MutableDate(object):
             self._date -= timedelta(microseconds=amount)
         return self
 
-    def set(self, **kwds):
-        """A Pythonic way to set various date attributes."""
+    def replace(self, **kwds):
+        """A Pythonic way to replace various date attributes."""
         for key, value in kwds.iteritems():
-            if key == 'years':
+            if key == 'years' or key == 'year':
                 self._date = self._date.replace(year=value)
-            elif key == 'months':
+            elif key == 'months' or key == 'month':
                 self._date = self._date.replace(month=value)
-            elif key == 'days':
+            elif key == 'days' or key == 'day':
                 self._date = self._date.replace(day=value)
-            elif key == 'hours':
+            elif key == 'hours' or key == 'hour':
                 self._date = self._date.replace(hour=value)
-            elif key == 'minutes':
+            elif key == 'minutes' or key == 'minute':
                 self._date = self._date.replace(minute=value)
-            elif key == 'seconds':
+            elif key == 'seconds' or key == 'second':
                 self._date = self._date.replace(second=value)
-            elif key == 'microseconds':
+            elif key == 'microseconds' or key == 'microsecond':
                 self._date = self._date.replace(microsecond=value)
         return self
 
