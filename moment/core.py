@@ -4,15 +4,18 @@ from datetime import datetime, timedelta
 import pytz
 import times
 
-from .date import MutableDate, add_month, subtract_month
+from .date import MutableDate
 from .parse import parse_date_and_formula, parse_js_date
 
 
 class Moment(MutableDate):
     """A class to abstract date difficulties."""
 
-    def __init__(self, date=None, formula=None):
-        date, formula = parse_date_and_formula(date, formula)
+    def __init__(self, *args):
+        if args:
+            date, formula = parse_date_and_formula(*args)
+        else:
+            date, formula = (None, None)
         self._date = date
         self._formula = formula
 

@@ -1,8 +1,9 @@
 from datetime import datetime
 
 
-def parse_date_and_formula(date, formula):
+def parse_date_and_formula(*args):
     """Doesn't need to be part of core Moment class."""
+    date, formula = _parse_arguments(*args)
     if date and formula:
         if '%' not in formula:
             formula = parse_js_date(formula)
@@ -14,6 +15,19 @@ def parse_date_and_formula(date, formula):
         date = datetime(*date)
     if formula is None:
         formula = "%Y-%m-%d"
+    return date, formula
+
+
+def _parse_arguments(*args):
+    """Because I'm not particularly Pythonic."""
+    formula = None
+    if len(args) == 1:
+        date = args[0]
+    elif len(args) == 2:
+        date = args[0]
+        formula = args[1]
+    else:
+        date = args
     return date, formula
 
 

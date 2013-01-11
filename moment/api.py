@@ -5,9 +5,9 @@ Simple API functionality.
 from .core import Moment
 
 
-def date(time, formula=None):
+def date(*args):
     """Create a moment."""
-    return Moment(time, formula)
+    return Moment(*args)
 
 
 def now():
@@ -15,7 +15,7 @@ def now():
     return Moment().now()
 
 
-def utc(date=None, formula=None):
+def utc(date, formula=None):
     """Create a date using the UTC time zone."""
     return Moment().utc(date, formula)
 
