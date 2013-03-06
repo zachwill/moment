@@ -59,14 +59,14 @@ moment.date([2012, 12, 18]).to_date()
 # Alternatively, use the done method to return a datetime
 moment.date((2012, 12, 18)).done()
 
+# Don't like the methods? There's a @property or two for that.
+moment.now().datetime == moment.now().date
+
 # And, who needs an iterable when we have *args?
 moment.date(2012, 12, 18).done()
 
 # We can do the same thing with the UTC method
 moment.utc(2012, 12, 18).to_date()
-
-# Don't like the methods? There's a @property or two for that.
-moment.now().datetime == moment.now().date
 
 # Create and format a moment using Moment.js semantics
 moment.now().format('YYYY-M-D')
