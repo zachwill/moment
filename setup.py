@@ -7,14 +7,16 @@ try:
 except ImportError:
     from distutils.core import setup
 
+description = open('README.md').read()
 
 setup(
     name="moment",
-    version="0.0.12",
+    version="0.0.13",
     url="http://github.com/zachwill/moment",
     author="Zach Williams",
     author_email="hey@zachwill.com",
     description="Dealing with dates and times should be easy",
+    long_description=description,
     keywords=['moment', 'dates', 'times', 'zachwill'],
     packages=[
         'moment'
