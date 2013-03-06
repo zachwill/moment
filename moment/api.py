@@ -15,9 +15,9 @@ def now():
     return Moment().now()
 
 
-def utc(date, formula=None):
+def utc(*args):
     """Create a date using the UTC time zone."""
-    return Moment().utc(date, formula)
+    return Moment().utc(*args)
 
 
 def utcnow():

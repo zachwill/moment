@@ -11,7 +11,7 @@ description = open('README.md').read()
 
 setup(
     name="moment",
-    version="0.0.13",
+    version="0.0.14",
     url="http://github.com/zachwill/moment",
     author="Zach Williams",
     author_email="hey@zachwill.com",

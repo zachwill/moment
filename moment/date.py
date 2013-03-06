@@ -182,11 +182,11 @@ class MutableDate(object):
         self._date = self._date.replace(microsecond=number)
         return self
 
-    def datetime(self):
+    def to_date(self):
         """Return the mutable date's inner datetime format."""
         return self._date
 
-    def to_date(self):
+    def datetime(self):
         """Return the mutable date's inner datetime format."""
         return self._date
 

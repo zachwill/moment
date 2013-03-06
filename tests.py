@@ -2,6 +2,7 @@
 
 from unittest import TestCase, main
 from datetime import datetime
+import pytz
 import moment
 
 
@@ -18,6 +19,14 @@ class SimpleAPI(TestCase):
     def test_date_function_with_iterable(self):
         d = moment.date((2012, 12, 18))
         self.assertEquals(d, datetime(2012, 12, 18))
+
+    def test_date_function_with_args(self):
+        d = moment.date(2012, 12, 18)
+        self.assertEquals(d, datetime(2012, 12, 18))
+
+    def test_utc_function_with_args(self):
+        d = moment.utc(2012, 12, 18)
+        self.assertEquals(d, datetime(2012, 12, 18, tzinfo=pytz.utc))
 
     def test_now_function_with_current_date(self):
         d = moment.now().to_date()

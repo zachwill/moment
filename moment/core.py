@@ -23,8 +23,8 @@ class Moment(MutableDate):
         self._date = datetime.now()
         return self
 
-    def utc(self, date=None, formula=None):
-        date, formula = parse_date_and_formula(date, formula)
+    def utc(self, *args):
+        date, formula = parse_date_and_formula(*args)
         self._date = pytz.timezone('UTC').localize(date)
         self._formula = formula
         return self

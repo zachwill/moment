@@ -59,6 +59,12 @@ moment.date([2012, 12, 18]).to_date()
 # Alternatively, use the done method to return a datetime
 moment.date((2012, 12, 18)).done()
 
+# And, who needs an iterable when we have star args?
+moment.date(2012, 12, 18).done()
+
+# Same thing with UTC datetimes
+moment.utc(2012, 12, 18).to_date()
+
 # Create and format a moment using Moment.js semantics
 moment.now().format('YYYY-M-D')
 
@@ -97,7 +103,7 @@ moment.date([2012, 12, 18]).add(days=2).subtract(weeks=3).done()
 moment.utcnow().add(years=3).add(months=2).format('YYYY-M-D h:m A')
 
 # Both alternatively take keyword arguments
-moment.date((2012, 12, 19)).add(hours=1, minutes=2, seconds=3)
+moment.date(2012, 12, 19).add(hours=1, minutes=2, seconds=3)
 
 # And a similar subtract example
 moment.date([2012, 12, 19, 1, 2, 3]).subtract(hours=1, minutes=2, seconds=3)
