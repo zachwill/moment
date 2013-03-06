@@ -103,6 +103,8 @@ class MutableDate(object):
                 self._date = self._date.replace(second=value)
             elif key == 'microseconds' or key == 'microsecond':
                 self._date = self._date.replace(microsecond=value)
+            elif key == 'weekday':
+                self.weekday(value)
         return self
 
     def epoch(self, rounding=True, milliseconds=False):

@@ -59,22 +59,22 @@ class SimpleAPI(TestCase):
         self.assertTrue(datetime(2012, 12, 19) - d)
 
 
-class Chaining(TestCase):
+class Replacement(TestCase):
 
     def test_simple_chaining_commands(self):
         d = moment.date([2012, 12, 18])
         expecting = moment.date((2012, 12, 18, 1, 2, 3)).done()
-        d.hours(1).minutes(2).seconds(3)
+        d.replace(hours=1, minutes=2, seconds=3)
         self.assertEqual(d, expecting)
 
     def test_chaining_with_format(self):
         d = moment.utc((2012, 12, 18))
-        d.hours(1).add('minutes', 2).seconds(3)
+        d.replace(hours=1).add(minutes=2).replace(seconds=3)
         expecting = "2012-12-18 01:02:03"
         self.assertEquals(d.format('YYYY-MM-DD hh:mm:ss'), expecting)
 
     def test_properties_after_chaining(self):
-        d = moment.now().years(1984).months(1).days(1)
+        d = moment.now().replace(years=1984, months=1, days=1)
         self.assertEquals(d.year, 1984)
 
     def test_add_with_keywords(self):
@@ -116,6 +116,11 @@ class Weekdays(TestCase):
         d = moment.date([2012, 12, 19])
         sunday = moment.date([2012, 12, 16])
         self.assertEquals(d.weekday(0), sunday)
+
+    def test_weekdays_with_replace(self):
+        d = moment.date([2012, 12, 19])
+        sunday = moment.date([2012, 12, 16])
+        self.assertEquals(d.replace(weekday=0), sunday)
 
     def test_weekdays_with_negative_numbers(self):
         d = moment.date((2012, 12, 19))

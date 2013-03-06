@@ -93,6 +93,15 @@ class Moment(MutableDate):
         """Return a clone of the current moment."""
         return Moment(self._date)
 
+    def copy(self):
+        """Same as clone."""
+        return Moment(self._date)
+
+    @property
+    def date(self):
+        """Access the internal datetime variable."""
+        return self._date
+
     def __repr__(self):
         if self._date is not None:
             return "<Moment(%s)>" % (self._date.strftime(self._formula))

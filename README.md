@@ -74,7 +74,7 @@ moment.utcnow().timezone('US/Eastern').done()
 
 # You can also clone a moment, so the original stays unaltered
 now = moment.utcnow().timezone('US/Pacific')
-future = now.clone().add('weeks', 2)
+future = now.clone().add(weeks=2)
 ```
 
 Chaining
@@ -84,10 +84,10 @@ Moment allows you to chain commands, which turns out to be super useful.
 
 ```python
 # Customize your moment by chaining commands
-moment.date([2012, 12, 18]).add('days', 2).subtract('weeks', 3).done()
+moment.date([2012, 12, 18]).add(days=2).subtract(weeks=3).done()
 
 # Imagine trying to do this with datetime, right?
-moment.utcnow().add('years', 3).add('months', 2).format('YYYY-M-D h:m A')
+moment.utcnow().add(years=3).add(months=2).format('YYYY-M-D h:m A')
 
 # Both alternatively take keyword arguments
 moment.date((2012, 12, 19)).add(hours=1, minutes=2, seconds=3)
@@ -95,22 +95,22 @@ moment.date((2012, 12, 19)).add(hours=1, minutes=2, seconds=3)
 # And a similar subtract example
 moment.date([2012, 12, 19, 1, 2, 3]).subtract(hours=1, minutes=2, seconds=3)
 
-# In addition to adding/subtracting, we can also set values
-moment.now().hours(5).minutes(15).seconds(0).epoch()
+# In addition to adding/subtracting, we can also replace values
+moment.now().replace(hours=5, minutes=15, seconds=0).epoch()
 
 # And, if you'd prefer to keep the microseconds on your epoch value
-moment.now().hours(5).minutes(15).seconds(0).epoch(rounding=False)
+moment.now().replace(hours=5, minutes=15, seconds=0).epoch(rounding=False)
 
 # Years, months, and days can also be set
-moment.now().years(1984).months(1).days(1).hours(0).minutes(0).seconds(0)
+moment.now().replace(years=1984, months=1, days=1, hours=0, minutes=0, seconds=0)
 
-# Why are the methods plural? Because datetime properties are available.
+# Also, datetime properties are available
 moment.utc((2012, 12, 19)).year == 2012
 
 # We can also manipulate to preferred weekdays, such as Monday
-moment.date((2012, 12, 19)).weekday(1).strftime('%Y-%m-%d')
+moment.date((2012, 12, 19)).replace(weekday=1).strftime('%Y-%m-%d')
 
-# Or, this upcoming Sunday
+# Or, this upcoming Sunday (with alternative syntax)
 moment.date('2012-12-19', 'YYYY-MM-DD').weekday(7).to_date()
 
 # We can even go back to two Sundays ago
