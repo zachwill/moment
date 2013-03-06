@@ -102,10 +102,10 @@ moment.date([2012, 12, 18]).add(days=2).subtract(weeks=3).done()
 # Imagine trying to do this with datetime, right?
 moment.utcnow().add(years=3).add(months=2).format('YYYY-M-D h:m A')
 
-# Both alternatively take keyword arguments
+# You can use multiple keyword arguments
 moment.date(2012, 12, 19).add(hours=1, minutes=2, seconds=3)
 
-# And a similar subtract example
+# And, a similar subtract example...
 moment.date([2012, 12, 19, 1, 2, 3]).subtract(hours=1, minutes=2, seconds=3)
 
 # In addition to adding/subtracting, we can also replace values
