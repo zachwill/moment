@@ -21,11 +21,13 @@ class Moment(MutableDate):
         self._formula = formula
 
     def now(self):
+        """Create a moment with the current datetime."""
         self._date = datetime.now()
         self._formula = "%Y-%m-%d"
         return self
 
     def utc(self, *args):
+        """Create a moment from a UTC date."""
         date, formula = parse_date_and_formula(*args)
         self._date = pytz.timezone('UTC').localize(date)
         self._formula = formula
@@ -86,6 +88,7 @@ class Moment(MutableDate):
         return self._date.strftime(formula)
 
     def diff(self, moment, measurement=None):
+        """Return the difference between moments."""
         return self - moment
 
     def done(self):
