@@ -59,7 +59,7 @@ moment.date([2012, 12, 18]).to_date()
 # Alternatively, use the done method to return a datetime
 moment.date((2012, 12, 18)).done()
 
-# And, who needs an iterable when we have star args?
+# And, who needs an iterable when we have *args?
 moment.date(2012, 12, 18).done()
 
 # We can do the same thing with the UTC method
