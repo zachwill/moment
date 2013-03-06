@@ -58,6 +58,10 @@ class SimpleAPI(TestCase):
         d = moment.date((2012, 12, 18))
         self.assertTrue(datetime(2012, 12, 19) - d)
 
+    def test_date_property(self):
+        d = moment.date(2012, 12, 18).date
+        self.assertEquals(d, datetime(2012, 12, 18))
+
 
 class Replacement(TestCase):
 
