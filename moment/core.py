@@ -1,5 +1,6 @@
 from calendar import timegm
 from datetime import datetime, timedelta
+from time import timezone
 
 import pytz
 import times
@@ -21,6 +22,7 @@ class Moment(MutableDate):
 
     def now(self):
         self._date = datetime.now()
+        self._formula = "%Y-%m-%d"
         return self
 
     def utc(self, *args):
@@ -32,6 +34,7 @@ class Moment(MutableDate):
     def utcnow(self):
         """UTC equivalent to now."""
         self._date = pytz.timezone('UTC').localize(datetime.utcnow())
+        self._formula = "%Y-%m-%d"
         return self
 
     def unix(self, timestamp, utc=False):
@@ -106,3 +109,8 @@ class Moment(MutableDate):
         if self._date is not None:
             return "<Moment(%s)>" % (self._date.strftime(self._formula))
         return "<Moment>"
+
+    def __str__(self):
+        formatted = self._date.strftime('%Y-%m-%dT%H:%M:%S')
+        tz = str.format('{0:+06.2f}', -float(timezone) / 3600)
+        return formatted + tz
