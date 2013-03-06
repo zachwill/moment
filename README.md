@@ -62,7 +62,7 @@ moment.date((2012, 12, 18)).done()
 # And, who needs an iterable when we have star args?
 moment.date(2012, 12, 18).done()
 
-# Same thing with UTC datetimes
+# We can do the same thing with the UTC method
 moment.utc(2012, 12, 18).to_date()
 
 # Create and format a moment using Moment.js semantics
@@ -77,8 +77,8 @@ moment.date(datetime(2012, 12, 18)).locale('US/Central').done()
 # Alter the moment's UTC time zone to a different time zone
 moment.utcnow().timezone('US/Eastern').to_date()
 
-# Set and update your moment's time zone. For instance, I'm in SF
-# but want NYC's current time.
+# Set and update your moment's time zone. For instance, I'm on the
+# west coast, but want NYC's current time.
 moment.now().locale('US/Pacific').timezone('US/Eastern')
 
 # In order to manipulate time zones, a locale must always be set or
