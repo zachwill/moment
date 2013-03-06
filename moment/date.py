@@ -186,8 +186,14 @@ class MutableDate(object):
         """Return the mutable date's inner datetime format."""
         return self._date
 
+    @property
     def datetime(self):
         """Return the mutable date's inner datetime format."""
+        return self._date
+
+    @property
+    def date(self):
+        """Access the internal datetime variable."""
         return self._date
 
     @property
