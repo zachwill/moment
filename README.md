@@ -66,10 +66,10 @@ moment.now().format('YYYY-M-D')
 moment.date(2012, 12, 18).strftime('%Y-%m-%d')
 
 # Update your moment's time zone
-moment.date(datetime(2012, 12, 18)).locale('US/Central').done()
+moment.date(datetime(2012, 12, 18)).locale('US/Central').date
 
 # Alter the moment's UTC time zone to a different time zone
-moment.utcnow().timezone('US/Eastern').to_date()
+moment.utcnow().timezone('US/Eastern').date
 
 # Set and update your moment's time zone. For instance, I'm on the
 # west coast, but want NYC's current time.
