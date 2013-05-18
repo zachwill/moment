@@ -54,25 +54,19 @@ moment.unix(1355875153626)
 moment.unix(1355875153626, utc=True)
 
 # Return a datetime instance
-moment.date([2012, 12, 18]).to_date()
-
-# Alternatively, use the done method to return a datetime
-moment.date((2012, 12, 18)).done()
-
-# Don't like the methods? There's a @property or two for that.
-moment.now().datetime == moment.now().date
+moment.date(2012, 12, 18).date
 
 # And, who needs an iterable when we have *args?
-moment.date(2012, 12, 18).done()
+moment.date(2012, 12, 18).date
 
 # We can do the same thing with the UTC method
-moment.utc(2012, 12, 18).to_date()
+moment.utc(2012, 12, 18).date
 
 # Create and format a moment using Moment.js semantics
 moment.now().format('YYYY-M-D')
 
 # Create and format a moment with strftime semantics
-moment.date((2012, 12, 18)).strftime('%Y-%m-%d')
+moment.date(2012, 12, 18).strftime('%Y-%m-%d')
 
 # Update your moment's time zone
 moment.date(datetime(2012, 12, 18)).locale('US/Central').done()
@@ -86,7 +80,7 @@ moment.now().locale('US/Pacific').timezone('US/Eastern')
 
 # In order to manipulate time zones, a locale must always be set or
 # you must be using UTC.
-moment.utcnow().timezone('US/Eastern').done()
+moment.utcnow().timezone('US/Eastern').date
 
 # You can also clone a moment, so the original stays unaltered
 now = moment.utcnow().timezone('US/Pacific')
@@ -100,7 +94,7 @@ Moment allows you to chain commands, which turns out to be super useful.
 
 ```python
 # Customize your moment by chaining commands
-moment.date([2012, 12, 18]).add(days=2).subtract(weeks=3).done()
+moment.date(2012, 12, 18).add(days=2).subtract(weeks=3).date
 
 # Imagine trying to do this with datetime, right?
 moment.utcnow().add(years=3).add(months=2).format('YYYY-M-D h:m A')
@@ -121,14 +115,14 @@ moment.now().replace(hours=5, minutes=15, seconds=0).epoch(rounding=False)
 moment.now().replace(years=1984, months=1, days=1, hours=0, minutes=0, seconds=0)
 
 # Also, datetime properties are available
-moment.utc((2012, 12, 19)).year == 2012
+moment.utc(2012, 12, 19).year == 2012
 
 # We can also manipulate to preferred weekdays, such as Monday
-moment.date((2012, 12, 19)).replace(weekday=1).strftime('%Y-%m-%d')
+moment.date(2012, 12, 19).replace(weekday=1).strftime('%Y-%m-%d')
 
 # Or, this upcoming Sunday (with alternative syntax)
-moment.date('2012-12-19', 'YYYY-MM-DD').weekday(7).to_date()
+moment.date('2012-12-19', 'YYYY-MM-DD').weekday(7).date
 
 # We can even go back to two Sundays ago
-moment.date([2012, 12, 19]).weekday(-7).format('YYYY-MM-DD')
+moment.date(2012, 12, 19).weekday(-7).format('YYYY-MM-DD')
 ```

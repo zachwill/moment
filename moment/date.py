@@ -118,27 +118,6 @@ class MutableDate(object):
             seconds *= 1000
         return seconds
 
-    def years(self, number):
-        """Mutate the original moment by changing the year."""
-        if number < 0:
-            return self.subtract('years', abs(number))
-        self._date = self._date.replace(year=number)
-        return self
-
-    def months(self, number):
-        """Mutate the original moment by changing the month."""
-        if number < 0:
-            return self.subtract('months', abs(number))
-        self._date = self._date.replace(month=number)
-        return self
-
-    def days(self, number):
-        """Mutate the original moment by changing the day of the month."""
-        if number < 0:
-            return self.subtract('days', abs(number))
-        self._date = self._date.replace(day=number)
-        return self
-
     def weekdays(self, number):
         """Just in case."""
         return self.weekday(number)
@@ -152,34 +131,6 @@ class MutableDate(object):
             days = weekday - number
         delta = self._date - timedelta(days)
         self._date = delta
-        return self
-
-    def hours(self, number):
-        """Mutate the original moment by changing the hour."""
-        if number < 0:
-            return self.subtract('hours', abs(number))
-        self._date = self._date.replace(hour=number)
-        return self
-
-    def minutes(self, number):
-        """Mutate the original moment by changing the minutes."""
-        if number < 0:
-            return self.subtract('minutes', abs(number))
-        self._date = self._date.replace(minute=number)
-        return self
-
-    def seconds(self, number):
-        """Mutate the original moment by changing the seconds."""
-        if number < 0:
-            return self.subtract('seconds', abs(number))
-        self._date = self._date.replace(second=number)
-        return self
-
-    def microseconds(self, number):
-        """Mutate the original moment by changing the seconds."""
-        if number < 0:
-            return self.subtract('microseconds', abs(number))
-        self._date = self._date.replace(microsecond=number)
         return self
 
     def to_date(self):
@@ -213,7 +164,15 @@ class MutableDate(object):
         return self._date.hour
 
     @property
+    def hours(self):
+        return self._date.hour
+
+    @property
     def minute(self):
+        return self._date.minute
+
+    @property
+    def minutes(self):
         return self._date.minute
 
     @property
@@ -221,7 +180,15 @@ class MutableDate(object):
         return self._date.second
 
     @property
+    def seconds(self):
+        return self._date.second
+
+    @property
     def microsecond(self):
+        return self._date.microsecond
+
+    @property
+    def microseconds(self):
         return self._date.microsecond
 
     @property
