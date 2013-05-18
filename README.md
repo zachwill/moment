@@ -19,8 +19,7 @@ A Python library for dealing with dates/times. Inspired by both
 Installation
 ------------
 
-This is extremely alpha software right now. Eventually you'll be able to install
-it with:
+I would advise that this is alpha-quality software.
 
 `pip install moment`
 
