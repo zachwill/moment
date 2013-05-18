@@ -114,6 +114,9 @@ moment.now().replace(years=1984, months=1, days=1, hours=0, minutes=0, seconds=0
 # Also, datetime properties are available
 moment.utc(2012, 12, 19).year == 2012
 
+# Including plural ones (since I'm bad at remembering)
+moment.now().seconds
+
 # We can also manipulate to preferred weekdays, such as Monday
 moment.date(2012, 12, 19).replace(weekday=1).strftime('%Y-%m-%d')
 
