@@ -56,9 +56,6 @@ moment.unix(1355875153626, utc=True)
 # Return a datetime instance
 moment.date(2012, 12, 18).date
 
-# And, who needs an iterable when we have *args?
-moment.date(2012, 12, 18).date
-
 # We can do the same thing with the UTC method
 moment.utc(2012, 12, 18).date
 
