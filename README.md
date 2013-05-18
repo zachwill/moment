@@ -120,8 +120,8 @@ moment.now().seconds
 # We can also manipulate to preferred weekdays, such as Monday
 moment.date(2012, 12, 19).replace(weekday=1).strftime('%Y-%m-%d')
 
-# Or, this upcoming Sunday (with alternative syntax)
-moment.date('2012-12-19', 'YYYY-MM-DD').weekday(7).date
+# Or, this upcoming Sunday
+moment.date('2012-12-19', 'YYYY-MM-DD').replace(weekday=7).date
 
 # We can even go back to two Sundays ago
 moment.date(2012, 12, 19).weekday(-7).format('YYYY-MM-DD')
