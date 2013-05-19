@@ -3,7 +3,7 @@ Where the magic happens.
 """
 
 import calendar
-from datetime import  datetime, timedelta
+from datetime import datetime, timedelta
 
 
 def add_month(date, number):
@@ -136,6 +136,11 @@ class MutableDate(object):
     def to_date(self):
         """Return the mutable date's inner datetime format."""
         return self._date
+
+    def zero(self):
+        """Get rid of hour, minute, second, and microsecond information."""
+        self.replace(hours=0, minutes=0, seconds=0, microseconds=0)
+        return self
 
     @property
     def datetime(self):
