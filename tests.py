@@ -115,22 +115,17 @@ class Weekdays(TestCase):
         d = moment.date([2012, 12, 19])
         yesterday = moment.date([2012, 12, 18])
         self.assertEquals(d.to_date().isoweekday(), 3)
-        self.assertEquals(d.weekday(3), d)
-        self.assertEquals(d.weekday(2).done(), yesterday.done())
+        self.assertEquals(d.replace(weekday=3), d)
+        self.assertEquals(d.replace(weekday=2).done(), yesterday.done())
 
     def test_week_addition_equals_weekday_manipulation(self):
         d = moment.date([2012, 12, 19])
         upcoming = d.clone().add('weeks', 1)
         expecting = moment.date([2012, 12, 26]).to_date()
         self.assertEquals(upcoming, expecting)
-        self.assertEquals(d.weekday(10), upcoming)
+        self.assertEquals(d.replace(weekday=10), upcoming)
 
     def test_weekdays_with_zeros(self):
-        d = moment.date([2012, 12, 19])
-        sunday = moment.date([2012, 12, 16])
-        self.assertEquals(d.weekday(0), sunday)
-
-    def test_weekdays_with_replace(self):
         d = moment.date([2012, 12, 19])
         sunday = moment.date([2012, 12, 16])
         self.assertEquals(d.replace(weekday=0), sunday)
@@ -138,12 +133,12 @@ class Weekdays(TestCase):
     def test_weekdays_with_negative_numbers(self):
         d = moment.date((2012, 12, 19))
         expecting = moment.date([2012, 12, 9]).to_date()
-        self.assertEquals(d.weekday(-7), expecting)
+        self.assertEquals(d.replace(weekday=-7), expecting)
 
     def test_weekdays_with_larger_number_into_new_year(self):
         d = moment.date((2012, 12, 19))
         expecting = moment.date("2013-01-09", "YYYY-MM-DD").to_date()
-        self.assertEquals(d.weekday(24).done(), expecting)
+        self.assertEquals(d.replace(weekday=24).date, expecting)
 
 
 if __name__ == '__main__':

@@ -104,7 +104,7 @@ class MutableDate(object):
             elif key == 'microseconds' or key == 'microsecond':
                 self._date = self._date.replace(microsecond=value)
             elif key == 'weekday':
-                self.weekday(value)
+                self._weekday(value)
         return self
 
     def epoch(self, rounding=True, milliseconds=False):
@@ -118,11 +118,7 @@ class MutableDate(object):
             seconds *= 1000
         return seconds
 
-    def weekdays(self, number):
-        """Just in case."""
-        return self.weekday(number)
-
-    def weekday(self, number):
+    def _weekday(self, number):
         """Mutate the original moment by changing the day of the week."""
         weekday = self._date.isoweekday()
         if number < 0:
@@ -163,6 +159,10 @@ class MutableDate(object):
     @property
     def day(self):
         return self._date.day
+
+    @property
+    def weekday(self):
+        return self._date.isoweekday()
 
     @property
     def hour(self):
