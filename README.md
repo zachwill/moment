@@ -123,5 +123,8 @@ moment.date(2012, 12, 19).replace(weekday=1).strftime('%Y-%m-%d')
 moment.date('2012-12-19', 'YYYY-MM-DD').replace(weekday=7).date
 
 # We can even go back to two Sundays ago
-moment.date(2012, 12, 19).weekday(-7).format('YYYY-MM-DD')
+moment.date(2012, 12, 19).replace(weekday=-7).format('YYYY-MM-DD')
+
+# It's also available as a property
+moment.utcnow().weekday
 ```
