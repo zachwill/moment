@@ -127,4 +127,7 @@ moment.date(2012, 12, 19).replace(weekday=-7).format('YYYY-MM-DD')
 
 # It's also available as a property
 moment.utcnow().weekday
+
+# And, there's an easy way to zero out the hours, minutes, and seconds
+moment.utcnow().zero()
 ```
