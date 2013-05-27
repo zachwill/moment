@@ -37,23 +37,23 @@ class MutableDate(object):
         if not key and not amount and len(kwds):
             for k, v in kwds.iteritems():
                 self.add(k, v)
-        if key == 'years':
+        if key == 'years' or key == 'year':
             self._date = add_month(self._date, amount * 12)
-        elif key == 'months':
+        elif key == 'months' or key == 'month':
             self._date = add_month(self._date, amount)
-        elif key == 'weeks':
+        elif key == 'weeks' or key == 'week':
             self._date += timedelta(weeks=amount)
-        elif key == 'days':
+        elif key == 'days' or key == 'day':
             self._date += timedelta(days=amount)
-        elif key == 'hours':
+        elif key == 'hours' or key == 'hour':
             self._date += timedelta(hours=amount)
-        elif key == 'minutes':
+        elif key == 'minutes' or key == 'minute':
             self._date += timedelta(minutes=amount)
-        elif key == 'seconds':
+        elif key == 'seconds' or key == 'second':
             self._date += timedelta(seconds=amount)
-        elif key == 'milliseconds':
+        elif key == 'milliseconds' or key == 'millisecond':
             self._date += timedelta(milliseconds=amount)
-        elif key == 'microseconds':
+        elif key == 'microseconds' or key == 'microsecond':
             self._date += timedelta(microseconds=amount)
         return self
 
@@ -66,23 +66,23 @@ class MutableDate(object):
         if not key and not amount and len(kwds):
             for k, v in kwds.iteritems():
                 self.subtract(k, v)
-        if key == 'years':
+        if key == 'years' or key == 'year':
             self._date = subtract_month(self._date, amount * 12)
-        elif key == 'months':
+        elif key == 'months' or key == 'month':
             self._date = subtract_month(self._date, amount)
-        elif key == 'weeks':
+        elif key == 'weeks' or key == 'week':
             self._date -= timedelta(weeks=amount)
-        elif key == 'days':
+        elif key == 'days' or key == 'day':
             self._date -= timedelta(days=amount)
-        elif key == 'hours':
+        elif key == 'hours' or key == 'hour':
             self._date -= timedelta(hours=amount)
-        elif key == 'minutes':
+        elif key == 'minutes' or key == 'minute':
             self._date -= timedelta(minutes=amount)
-        elif key == 'seconds':
+        elif key == 'seconds' or key == 'second':
             self._date -= timedelta(seconds=amount)
-        elif key == 'milliseconds':
+        elif key == 'milliseconds' or key == 'millisecond':
             self._date -= timedelta(milliseconds=amount)
-        elif key == 'microseconds':
+        elif key == 'microseconds' or key == 'microsecond':
             self._date -= timedelta(microseconds=amount)
         return self
 
@@ -128,6 +128,10 @@ class MutableDate(object):
         delta = self._date - timedelta(days)
         self._date = delta
         return self
+
+    def isoformat(self):
+        """Return the date's ISO 8601 string."""
+        return self._date.isoformat()
 
     def to_date(self):
         """Return the mutable date's inner datetime format."""
