@@ -51,6 +51,7 @@ class Moment(MutableDate):
         except ValueError:
             # Milliseconds since epoch
             self._date = fromtimestamp(timestamp / 1000)
+        self._formula = "%Y-%m-%d"
         return self
 
     def locale(self, zone=None):
