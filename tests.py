@@ -37,7 +37,7 @@ class SimpleAPI(TestCase):
         self.assertEquals(d, datetime(2012, 12, 18, tzinfo=pytz.utc))
 
     def test_now_function_with_current_date(self):
-        d = moment.now().to_date()
+        d = moment.now().date
         now = datetime.now()
         self.assertEquals(d.year, now.year)
         self.assertEquals(d.month, now.month)
@@ -55,8 +55,8 @@ class SimpleAPI(TestCase):
         self.assertEquals(d.second, now.second)
 
     def test_moment_can_transfer_between_datetime_and_moment(self):
-        d = moment.now().to_date()
-        self.assertEquals(d, moment.date(d).to_date())
+        d = moment.now().date
+        self.assertEquals(d, moment.date(d).date)
 
     def test_moment_unix_command(self):
         d = moment.unix(1355788800000, utc=True)
@@ -78,6 +78,10 @@ class SimpleAPI(TestCase):
     def test_date_property(self):
         d = moment.date(2012, 12, 18).date
         self.assertEquals(d, datetime(2012, 12, 18))
+
+    def test_zero_property(self):
+        d = moment.date(2012, 12, 18, 1, 2, 3)
+        self.assertEquals(d.zero.date, datetime(2012, 12, 18))
 
 
 class Replacement(TestCase):
@@ -122,14 +126,14 @@ class Weekdays(TestCase):
     def test_weekdays_can_be_manipulated(self):
         d = moment.date([2012, 12, 19])
         yesterday = moment.date([2012, 12, 18])
-        self.assertEquals(d.to_date().isoweekday(), 3)
+        self.assertEquals(d.date.isoweekday(), 3)
         self.assertEquals(d.replace(weekday=3), d)
         self.assertEquals(d.replace(weekday=2).done(), yesterday.done())
 
     def test_week_addition_equals_weekday_manipulation(self):
         d = moment.date([2012, 12, 19])
         upcoming = d.clone().add('weeks', 1)
-        expecting = moment.date([2012, 12, 26]).to_date()
+        expecting = moment.date([2012, 12, 26]).date
         self.assertEquals(upcoming, expecting)
         self.assertEquals(d.replace(weekday=10), upcoming)
 
@@ -140,12 +144,12 @@ class Weekdays(TestCase):
 
     def test_weekdays_with_negative_numbers(self):
         d = moment.date((2012, 12, 19))
-        expecting = moment.date([2012, 12, 9]).to_date()
+        expecting = moment.date([2012, 12, 9]).date
         self.assertEquals(d.replace(weekday=-7), expecting)
 
     def test_weekdays_with_larger_number_into_new_year(self):
         d = moment.date((2012, 12, 19))
-        expecting = moment.date("2013-01-09", "YYYY-MM-DD").to_date()
+        expecting = moment.date("2013-01-09").date
         self.assertEquals(d.replace(weekday=24).date, expecting)
 
 

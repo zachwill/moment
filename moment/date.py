@@ -133,10 +133,7 @@ class MutableDate(object):
         """Return the date's ISO 8601 string."""
         return self._date.isoformat()
 
-    def to_date(self):
-        """Return the mutable date's inner datetime format."""
-        return self._date
-
+    @property
     def zero(self):
         """Get rid of hour, minute, second, and microsecond information."""
         self.replace(hours=0, minutes=0, seconds=0, microseconds=0)
@@ -208,7 +205,7 @@ class MutableDate(object):
         if isinstance(other, datetime):
             return self._date - other
         elif isinstance(other, type(self)):
-            return self._date - other.to_date()
+            return self._date - other.date
 
     def __rsub__(self, other):
         return self.__sub__(other)
@@ -217,34 +214,34 @@ class MutableDate(object):
         if isinstance(other, datetime):
             return self._date < other
         elif isinstance(other, type(self)):
-            return self._date < other.to_date()
+            return self._date < other.date
 
     def __le__(self, other):
         if isinstance(other, datetime):
             return self._date <= other
         elif isinstance(other, type(self)):
-            return self._date <= other.to_date()
+            return self._date <= other.date
 
     def __eq__(self, other):
         if isinstance(other, datetime):
             return self._date == other
         elif isinstance(other, type(self)):
-            return self._date == other.to_date()
+            return self._date == other.date
 
     def __ne__(self, other):
         if isinstance(other, datetime):
             return self._date != other
         elif isinstance(other, type(self)):
-            return self._date != other.to_date()
+            return self._date != other.date
 
     def __gt__(self, other):
         if isinstance(other, datetime):
             return self._date > other
         elif isinstance(other, type(self)):
-            return self._date > other.to_date()
+            return self._date > other.date
 
     def __ge__(self, other):
         if isinstance(other, datetime):
             return self._date >= other
         elif isinstance(other, type(self)):
-            return self._date >= other.to_date()
+            return self._date >= other.date
