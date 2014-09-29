@@ -24,6 +24,14 @@ class SimpleAPI(TestCase):
         d = moment.date(2012, 12, 18)
         self.assertEquals(d, datetime(2012, 12, 18))
 
+    def test_date_function_with_string(self):
+        d = moment.date("2012-12-18")
+        self.assertEquals(d, datetime(2012, 12, 18))
+
+    def test_date_function_with_unicode(self):
+        d = moment.date(u"2012-12-18")
+        self.assertEquals(d, datetime(2012, 12, 18))
+
     def test_utc_function_with_args(self):
         d = moment.utc(2012, 12, 18)
         self.assertEquals(d, datetime(2012, 12, 18, tzinfo=pytz.utc))

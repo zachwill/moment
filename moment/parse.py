@@ -13,8 +13,10 @@ def parse_date_and_formula(*args):
             # Python datetime needs the month and day, too.
             date = [date[0], 1, 1]
         date = datetime(*date)
-    if formula is None:
-        formula = "%Y-%m-%d"
+    elif isinstance(date, str) or isinstance(date, unicode):
+        if formula is None:
+            formula = "%Y-%m-%d"
+        date = datetime.strptime(date, formula)
     return date, formula
 
 
