@@ -37,6 +37,9 @@ moment.date("12-18-2012", "M-D-YYYY")
 # Create a moment with strftime format
 moment.date("12-18-2012", "%m-%d-%Y")
 
+# By default, moment's use the "%Y-%m-%d" strftime format
+moment.date("2012-12-18")
+
 # Create a moment from the current datetime
 moment.now()
 
