@@ -62,27 +62,27 @@ moment.date(2012, 12, 18).date
 moment.utc(2012, 12, 18).date
 
 # Create and format a moment using Moment.js semantics
-moment.now().format('YYYY-M-D')
+moment.now().format("YYYY-M-D")
 
 # Create and format a moment with strftime semantics
-moment.date(2012, 12, 18).strftime('%Y-%m-%d')
+moment.date(2012, 12, 18).strftime("%Y-%m-%d")
 
 # Update your moment's time zone
-moment.date(datetime(2012, 12, 18)).locale('US/Central').date
+moment.date(datetime(2012, 12, 18)).locale("US/Central").date
 
 # Alter the moment's UTC time zone to a different time zone
-moment.utcnow().timezone('US/Eastern').date
+moment.utcnow().timezone("US/Eastern").date
 
 # Set and update your moment's time zone. For instance, I'm on the
 # west coast, but want NYC's current time.
-moment.now().locale('US/Pacific').timezone('US/Eastern')
+moment.now().locale("US/Pacific").timezone("US/Eastern")
 
 # In order to manipulate time zones, a locale must always be set or
 # you must be using UTC.
-moment.utcnow().timezone('US/Eastern').date
+moment.utcnow().timezone("US/Eastern").date
 
 # You can also clone a moment, so the original stays unaltered
-now = moment.utcnow().timezone('US/Pacific')
+now = moment.utcnow().timezone("US/Pacific")
 future = now.clone().add(weeks=2)
 ```
 
@@ -96,7 +96,7 @@ Moment allows you to chain commands, which turns out to be super useful.
 moment.date(2012, 12, 18).add(days=2).subtract(weeks=3).date
 
 # Imagine trying to do this with datetime, right?
-moment.utcnow().add(years=3, months=2).format('YYYY-M-D h:m A')
+moment.utcnow().add(years=3, months=2).format("YYYY-M-D h:m A")
 
 # You can use multiple keyword arguments
 moment.date(2012, 12, 19).add(hours=1, minutes=2, seconds=3)
@@ -120,13 +120,13 @@ moment.utc(2012, 12, 19).year == 2012
 moment.now().seconds
 
 # We can also manipulate to preferred weekdays, such as Monday
-moment.date(2012, 12, 19).replace(weekday=1).strftime('%Y-%m-%d')
+moment.date(2012, 12, 19).replace(weekday=1).strftime("%Y-%m-%d")
 
 # Or, this upcoming Sunday
-moment.date('2012-12-19').replace(weekday=7).date
+moment.date("2012-12-19").replace(weekday=7).date
 
 # We can even go back to two Sundays ago
-moment.date(2012, 12, 19).replace(weekday=-7).format('YYYY-MM-DD')
+moment.date(2012, 12, 19).replace(weekday=-7).format("YYYY-MM-DD")
 
 # It's also available as a property
 moment.utcnow().weekday
