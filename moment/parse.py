@@ -1,5 +1,7 @@
+import sys
 from datetime import datetime
 
+STRING_TYPES = (str,) if sys.version[0] == '3' else (basestring,)
 
 def parse_date_and_formula(*args):
     """Doesn't need to be part of core Moment class."""
@@ -13,7 +15,7 @@ def parse_date_and_formula(*args):
             # Python datetime needs the month and day, too.
             date = [date[0], 1, 1]
         date = datetime(*date)
-    elif isinstance(date, str) or isinstance(date, unicode):
+    elif isinstance(date, STRING_TYPES):
         if formula is None:
             formula = "%Y-%m-%d"
         date = datetime.strptime(date, formula)
