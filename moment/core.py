@@ -98,11 +98,11 @@ class Moment(MutableDate):
 
     def clone(self):
         """Return a clone of the current moment."""
-        return Moment(self._date)
+        return Moment(self._date, self._formula)
 
     def copy(self):
         """Same as clone."""
-        return Moment(self._date)
+        return Moment(self._date, self._formula)
 
     def __repr__(self):
         if self._date is not None:
