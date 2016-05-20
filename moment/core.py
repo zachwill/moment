@@ -60,7 +60,7 @@ class Moment(MutableDate):
             self._date = datetime.fromtimestamp(timegm(self._date.timetuple()))
         else:
             try:
-                self._date = pytz.timezone(zone).localize(self._date)
+                self._date = pytz.timezone(zone).normalize(self._date)
             except ValueError:
                 self._date = self._date.replace(tzinfo=pytz.timezone(zone))
         return self

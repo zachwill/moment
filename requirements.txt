@@ -1,2 +1,2 @@
-pytz
+pytz>=2016.4
 times
