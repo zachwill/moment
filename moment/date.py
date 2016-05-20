@@ -2,9 +2,11 @@
 Where the magic happens.
 """
 
+import sys
 import calendar
 from datetime import datetime, timedelta
 
+iteritems = (lambda k: iter(k.items())) if sys.version[0] == '3' else (lambda k: k.iteritems())
 
 def add_month(date, number):
     """Add a number of months to a date."""
@@ -35,7 +37,7 @@ class MutableDate(object):
     def add(self, key=None, amount=None, **kwds):
         """Add time to the original moment."""
         if not key and not amount and len(kwds):
-            for k, v in kwds.iteritems():
+            for k, v in iteritems(kwds):
                 self.add(k, v)
         if key == 'years' or key == 'year':
             self._date = add_month(self._date, amount * 12)
@@ -64,7 +66,7 @@ class MutableDate(object):
     def subtract(self, key=None, amount=None, **kwds):
         """Subtract time from the original moment."""
         if not key and not amount and len(kwds):
-            for k, v in kwds.iteritems():
+            for k, v in iteritems(kwds):
                 self.subtract(k, v)
         if key == 'years' or key == 'year':
             self._date = subtract_month(self._date, amount * 12)
@@ -88,7 +90,7 @@ class MutableDate(object):
 
     def replace(self, **kwds):
         """A Pythonic way to replace various date attributes."""
-        for key, value in kwds.iteritems():
+        for key, value in iteritems(kwds):
             if key == 'years' or key == 'year':
                 self._date = self._date.replace(year=value)
             elif key == 'months' or key == 'month':
