@@ -83,6 +83,20 @@ class SimpleAPI(TestCase):
         d = moment.date(2012, 12, 18, 1, 2, 3)
         self.assertEquals(d.zero.date, datetime(2012, 12, 18))
 
+    def test_cloning_a_UTC_date(self):
+        utc = moment.utc("2016-01-13T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
+        self.assertEquals(utc.hours, 0)
+        self.assertEquals(utc.format("YYYY-MM-DD"), "2016-01-13")
+        usa = utc.clone().locale("US/Eastern")
+        self.assertEquals(usa.hours, 19)
+        self.assertEquals(usa.format("YYYY-MM-DD"), "2016-01-12")
+
+    def test_copy_method_is_same_as_clone(self):
+        d = moment.date(2016, 5, 21)
+        copy = d.copy().subtract(weeks=1)
+        self.assertEquals(d, datetime(2016, 5, 21))
+        self.assertEquals(copy, datetime(2016, 5, 14))
+
 
 class Replacement(TestCase):
 
