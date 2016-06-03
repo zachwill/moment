@@ -5,6 +5,12 @@ Where the magic happens.
 import calendar
 from datetime import datetime, timedelta
 
+from .utils import _iteritems
+
+
+# ----------------------------------------------------------------------------
+# Utilities
+# ----------------------------------------------------------------------------
 
 def add_month(date, number):
     """Add a number of months to a date."""
@@ -26,6 +32,10 @@ def update_month(date, month):
     return date.replace(year=year, month=month, day=day)
 
 
+# ----------------------------------------------------------------------------
+# Main functionality
+# ----------------------------------------------------------------------------
+
 class MutableDate(object):
     """Incapsulate mutable dates in one class."""
 
@@ -35,7 +45,7 @@ class MutableDate(object):
     def add(self, key=None, amount=None, **kwds):
         """Add time to the original moment."""
         if not key and not amount and len(kwds):
-            for k, v in kwds.iteritems():
+            for k, v in _iteritems(kwds):
                 self.add(k, v)
         if key == 'years' or key == 'year':
             self._date = add_month(self._date, amount * 12)
@@ -64,7 +74,7 @@ class MutableDate(object):
     def subtract(self, key=None, amount=None, **kwds):
         """Subtract time from the original moment."""
         if not key and not amount and len(kwds):
-            for k, v in kwds.iteritems():
+            for k, v in _iteritems(kwds):
                 self.subtract(k, v)
         if key == 'years' or key == 'year':
             self._date = subtract_month(self._date, amount * 12)
@@ -88,7 +98,7 @@ class MutableDate(object):
 
     def replace(self, **kwds):
         """A Pythonic way to replace various date attributes."""
-        for key, value in kwds.iteritems():
+        for key, value in _iteritems(kwds):
             if key == 'years' or key == 'year':
                 self._date = self._date.replace(year=value)
             elif key == 'months' or key == 'month':
