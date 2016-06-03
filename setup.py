@@ -9,25 +9,26 @@ except ImportError:
 
 setup(
     name="moment",
-    version="0.3.1",
+    version="0.4",
     url="http://github.com/zachwill/moment",
     author="Zach Williams",
     author_email="hey@zachwill.com",
     description="Dealing with dates and times should be easy",
-    keywords=['moment', 'dates', 'times', 'zachwill'],
+    keywords=["moment", "dates", "times", "zachwill"],
     packages=[
-        'moment'
+        "moment"
     ],
     install_requires=[
-        'pytz>=2016.4',
-        'times'
+        "pytz>=2016.4",
+        "times",
     ],
-    license='MIT',
+    license="MIT",
     classifiers=[
-        'Development Status :: 1 - Planning',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        "Development Status :: 1 - Planning",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.5",
     ],
 )
