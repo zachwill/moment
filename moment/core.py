@@ -13,33 +13,33 @@ class Moment(MutableDate):
     """A class to abstract date difficulties."""
 
     def __init__(self, *args):
-        if args:
-            date, formula = parse_date_and_formula(*args)
-        else:
-            date, formula = (None, None)
+        date, formula = parse_date_and_formula(*args)
         self._date = date
         self._formula = formula
 
-    def now(self):
+    @classmethod
+    def now(cls):
         """Create a moment with the current datetime."""
-        self._date = datetime.now()
-        self._formula = "%Y-%m-%d"
-        return self
+        date = datetime.now()
+        formula = "%Y-%m-%d"
+        return cls(date, formula)
 
-    def utc(self, *args):
+    @classmethod
+    def utc(cls, *args):
         """Create a moment from a UTC date."""
         date, formula = parse_date_and_formula(*args)
-        self._date = pytz.timezone('UTC').localize(date)
-        self._formula = formula
-        return self
+        date = pytz.timezone("UTC").localize(date)
+        return cls(date, formula)
 
-    def utcnow(self):
+    @classmethod
+    def utcnow(cls):
         """UTC equivalent to now."""
-        self._date = pytz.timezone('UTC').localize(datetime.utcnow())
-        self._formula = "%Y-%m-%d"
-        return self
+        date = pytz.timezone("UTC").localize(datetime.utcnow())
+        formula= "%Y-%m-%d"
+        return cls(date, formula)
 
-    def unix(self, timestamp, utc=False):
+    @classmethod
+    def unix(cls, timestamp, utc=False):
         """Create a date from a Unix timestamp."""
         if utc:
             fromtimestamp = datetime.utcfromtimestamp
@@ -47,12 +47,12 @@ class Moment(MutableDate):
             fromtimestamp = datetime.fromtimestamp
         try:
             # Seconds since epoch
-            self._date = fromtimestamp(timestamp)
+            date = fromtimestamp(timestamp)
         except ValueError:
             # Milliseconds since epoch
-            self._date = fromtimestamp(timestamp / 1000)
-        self._formula = "%Y-%m-%d"
-        return self
+            date = fromtimestamp(timestamp / 1000)
+        formula = "%Y-%m-%d"
+        return cls(date, formula)
 
     def locale(self, zone=None):
         """Explicitly set the time zone you want to work with."""

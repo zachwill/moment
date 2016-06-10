@@ -6,6 +6,8 @@ def parse_date_and_formula(*args):
     """Doesn't need to be part of core Moment class."""
     date, formula = _parse_arguments(*args)
     if date and formula:
+        if isinstance(date, datetime):
+            return date, formula
         if '%' not in formula:
             formula = parse_js_date(formula)
         date = datetime.strptime(date, formula)
@@ -27,8 +29,7 @@ def _parse_arguments(*args):
     if len(args) == 1:
         date = args[0]
     elif len(args) == 2:
-        date = args[0]
-        formula = args[1]
+        date, formula = args
     else:
         date = args
     return date, formula
