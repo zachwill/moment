@@ -26,7 +26,7 @@ def subtract_month(date, number):
 
 def update_month(date, month):
     """Create a new date with a modified number of months."""
-    year = date.year + month / 12
+    year = date.year + int(month / 12)
     month = month % 12 + 1
     day = min(date.day, calendar.monthrange(year, month)[1])
     return date.replace(year=year, month=month, day=day)
