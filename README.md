@@ -1,10 +1,7 @@
 moment
 ======
 
-[![Build Status][travis]](https://travis-ci.org/zachwill/moment)
-
-[travis]: https://travis-ci.org/zachwill/moment.png?branch=master
-
+[![Build Status](https://travis-ci.org/zachwill/moment.svg?branch=master)](https://travis-ci.org/zachwill/moment)
 
 A Python library for dealing with dates/times. Inspired by both
 [**Moment.js**][moment] and the simplicity of Kenneth Reitz's
