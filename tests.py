@@ -97,6 +97,31 @@ class SimpleAPI(TestCase):
         self.assertEquals(d, datetime(2016, 5, 21))
         self.assertEquals(copy, datetime(2016, 5, 14))
 
+    def test_from_date_string(self):
+        d = moment.date(2015, 1, 1)
+
+        other = d.copy().subtract(seconds=10)
+        self.assertEquals(d.from_date(other), "a few seconds ago")
+        other = d.copy().subtract(seconds=45)
+        self.assertEquals(d.from_date(other), "a minute ago")
+        other = d.copy().subtract(minutes=5)
+        self.assertEquals(d.from_date(other), "5 minutes ago")
+        other = d.copy().subtract(minutes=45)
+        self.assertEquals(d.from_date(other), "an hour ago")
+        other = d.copy().subtract(hours=10)
+        self.assertEquals(d.from_date(other), "10 hours ago")
+        other = d.copy().subtract(hours=22)
+        self.assertEquals(d.from_date(other), "a day ago")
+        other = d.copy().subtract(days=15)
+        self.assertEquals(d.from_date(other), "15 days ago")
+        other = d.copy().subtract(days=26)
+        self.assertEquals(d.from_date(other), "a month ago")
+        other = d.copy().subtract(days=120)
+        self.assertEquals(d.from_date(other), "4 months ago")
+        other = d.copy().subtract(days=360)
+        self.assertEquals(d.from_date(other), "a year ago")
+        other = d.copy().subtract(years=4)
+        self.assertEquals(d.from_date(other), "4 years ago")
 
 class Replacement(TestCase):
 

@@ -143,6 +143,55 @@ class MutableDate(object):
         """Return the date's ISO 8601 string."""
         return self._date.isoformat()
 
+    def from_date(self, other):
+        """Returns a readable interval since a date before"""
+        return "{} ago".format(self._readable_timedelta(self - other))
+
+    def from_now(self):
+        """Returns a readable interval since now until the date"""
+        return self.from_date(datetime.now())
+
+    def to_date(self, other):
+        """Returns a readable interval until a future date"""
+        return "in {}".format(self._readable_timedelta(other - self))
+
+    def to_now(self):
+        """Returns a readable interval since the date until now"""
+        return self.to_date(datetime.now())
+    
+    def _readable_timedelta(self, td):
+        """Translate a timedelta into a readable and short string"""
+        if td.total_seconds() < 0:
+            td = -td
+
+        m = 60
+        h = 60*m
+        d = 24*h
+        rangemap = {
+            (0, 45):        "a few seconds",
+            (45, 90):       "a minute",
+            (90, 45*m):     "{minutes} minutes",
+            (45*m, 90*m):   "an hour",
+            (90*m, 22*h):   "{hours} hours",
+            (22*h, 36*h):   "a day",
+            (36*h, 26*d):   "{days} days",
+            (26*d, 45*d): "a month",
+            (45*d, 320*d):  "{months} months",
+            (320*d, 548*d): "a year",
+        }
+
+        inrange = lambda value, lbound, ubound: value >= lbound and value < ubound
+
+        for secrange, fmt in _iteritems(rangemap):
+            if inrange(td.total_seconds(), secrange[0], secrange[1]):
+                return fmt.format(
+                    minutes=td.seconds/60, 
+                    hours=td.seconds/3600, 
+                    days=td.days,
+                    months=td.days/30)
+        else:
+            return "{} years".format(td.days/365)
+
     @property
     def zero(self):
         """Get rid of hour, minute, second, and microsecond information."""
