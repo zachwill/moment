@@ -175,7 +175,7 @@ class MutableDate(object):
             (90*m, 22*h):   "{hours} hours",
             (22*h, 36*h):   "a day",
             (36*h, 26*d):   "{days} days",
-            (26*d, 45*d): "a month",
+            (26*d, 45*d):   "a month",
             (45*d, 320*d):  "{months} months",
             (320*d, 548*d): "a year",
         }
