@@ -192,21 +192,31 @@ class MutableDate(object):
         else:
             return "{} years".format(td.days/365)
 
-    def calendar_time(self, reference_date=datetime.now()):
-        """Returns a readable string containing the time relative to the reference_date"""
-        weekday = calendar.day_name[calendar.weekday(self.year, self.month, self.day)]
-        td = self.copy().zero - MutableDate(reference_date).zero
+    def calendar_time(self, reference_date=datetime.now(), formats={
+            "sameDay":  "Today",
+            "nextDay":  "Tomorrow",
+            "lastDay":  "Yesterday",
+            "nextWeek": "",
+            "lastWeek": "Last"
+        }):
+        """Returns a readable string containing the time 
+           relative to the reference_date"""
 
+
+        weekday = calendar.day_name[calendar.weekday(
+            self.year, self.month, self.day)]
+        td = self.copy().zero - MutableDate(reference_date).zero
+        
         if td.days == 0:
-            dayref = "Today"
+            dayref = formats["sameDay"]
         elif td.days == 1:
-            dayref = "Tomorrow"
+            dayref = formats["nextDay"]
         elif td.days == -1:
-            dayref = "Yesterday"
+            dayref = formats["lastDay"]
         elif td.days > 1 and td.days <= 7:
-            dayref = "Next {}".format(weekday)
+            dayref = "{} {}".format(formats["nextWeek"], weekday).strip()
         elif td.days < -1 and td.days >= -7:
-            dayref = "Last {}".format(weekday)
+            dayref = "{} {}".format(formats["lastWeek"], weekday).strip()
         else:
             return self.format("MM/DD/YYYY")
 
@@ -285,11 +295,12 @@ class MutableDate(object):
     def __sub__(self, other):
         if isinstance(other, datetime):
             return self._date - other
-        elif isinstance(other, type(self)) or issubclass(other.__class__, MutableDate):
+        elif isinstance(other, type(self)) \
+          or issubclass(other.__class__, MutableDate):
             return self._date - other.date
 
     def __rsub__(self, other):
-        return self.__sub__(other)
+        return -self.__sub__(other)
 
     def __lt__(self, other):
         if isinstance(other, datetime):

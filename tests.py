@@ -124,21 +124,35 @@ class SimpleAPI(TestCase):
         self.assertEquals(d.from_date(other), "4 years ago")
 
     def test_calendar_time(self):
-        d = moment.date([2016,12,20]).subtract('day', 1).replace(hour=23, minute=10)
-        self.assertEqual(d.calendar_time(), 'Yesterday at 23:10')
-        d.subtract('day', 1)
-        self.assertEqual(d.calendar_time(), 'Last Sunday at 23:10')
-        d.subtract('day', 1)
-        self.assertEqual(d.calendar_time(), 'Last Saturday at 23:10')
-        d.subtract('day', 10)
-        self.assertEqual(d.calendar_time(), '12/07/2016')
+        refdate = moment.date([2016,12,20])
+        
+        d = refdate.copy().replace(hour=10, minute=50)
 
-        d = moment.date([2016,12,20]).add('day', 1).replace(hour=10, minute=50)
-        self.assertEqual(d.calendar_time(), 'Tomorrow at 10:50')
         d.add('day', 1)
-        self.assertEqual(d.calendar_time(), 'Next Thursday at 10:50')
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        'Tomorrow at 10:50')
+        d.add('day', 1)
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        'Thursday at 10:50')
         d.add('day', 10)
-        self.assertEqual(d.calendar_time(), '01/01/2017')
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        '01/01/2017')
+
+        d = refdate.copy().replace(hour=23, minute=10)
+
+        d.subtract('day', 1)
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        'Yesterday at 23:10')
+        d.subtract('day', 1)
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        'Last Sunday at 23:10')
+        d.subtract('day', 1)
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        'Last Saturday at 23:10')
+        d.subtract('day', 10)
+        self.assertEqual(d.calendar_time(reference_date=refdate), 
+                        '12/07/2016')
+
 
 class Replacement(TestCase):
 
