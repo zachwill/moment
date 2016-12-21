@@ -192,6 +192,28 @@ class MutableDate(object):
         else:
             return "{} years".format(td.days/365)
 
+    def calendar_time(self, reference_date=datetime.now()):
+        """Returns a readable string containing the time relative to the reference_date"""
+        weekday = calendar.day_name[calendar.weekday(self.year, self.month, self.day)]
+        td = self.copy().zero - MutableDate(reference_date).zero
+
+        if td.days == 0:
+            dayref = "Today"
+        elif td.days == 1:
+            dayref = "Tomorrow"
+        elif td.days == -1:
+            dayref = "Yesterday"
+        elif td.days > 1 and td.days <= 7:
+            dayref = "Next {}".format(weekday)
+        elif td.days < -1 and td.days >= -7:
+            dayref = "Last {}".format(weekday)
+        else:
+            return self.format("MM/DD/YYYY")
+
+        hourref = "at {}".format(self.format("HH:mm"))
+
+        return "{dayref} {hourref}".format(dayref=dayref, hourref=hourref)
+
     @property
     def zero(self):
         """Get rid of hour, minute, second, and microsecond information."""
@@ -263,7 +285,7 @@ class MutableDate(object):
     def __sub__(self, other):
         if isinstance(other, datetime):
             return self._date - other
-        elif isinstance(other, type(self)):
+        elif isinstance(other, type(self)) or issubclass(other.__class__, MutableDate):
             return self._date - other.date
 
     def __rsub__(self, other):
