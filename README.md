@@ -81,6 +81,23 @@ moment.utcnow().timezone("US/Eastern").date
 # You can also clone a moment, so the original stays unaltered
 now = moment.utcnow().timezone("US/Pacific")
 future = now.clone().add(weeks=2)
+
+# Return human readable intervals for past dates...
+d = moment.date("2012-12-18")
+d.from_date(moment.date("2012-12-17")) # a day ago
+
+# ... with reference to now
+d = moment.now().subtract('hour', 4)
+d.from_now() # 4 hours ago
+
+# ... or future dates
+d = moment.date("2012-12-18")
+d.to_date(moment.date("2013-01-17")) # in a month
+
+# Human readable calendar dates
+d = moment.now().subtract('hour', 10)
+d.calendar_time()
+
 ```
 
 Chaining
