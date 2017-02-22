@@ -126,7 +126,7 @@ class MutableDate(object):
             seconds = round(seconds)
         if milliseconds:
             seconds *= 1000
-        return seconds
+        return int(seconds)
 
     def _weekday(self, number):
         """Mutate the original moment by changing the day of the week."""
