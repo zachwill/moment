@@ -4,6 +4,7 @@ Where the magic happens.
 
 import calendar
 from datetime import datetime, timedelta
+import pytz
 
 from .utils import _iteritems
 
@@ -120,7 +121,11 @@ class MutableDate(object):
     def epoch(self, rounding=True, milliseconds=False):
         """Milliseconds since epoch."""
         zero = datetime.utcfromtimestamp(0)
-        delta = self._date - zero
+        try:
+            delta = self._date - zero
+        except TypeError:
+            zero = zero.replace(tzinfo=pytz.utc)
+            delta = self._date - zero
         seconds = delta.total_seconds()
         if rounding:
             seconds = round(seconds)

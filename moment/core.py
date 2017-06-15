@@ -41,16 +41,20 @@ class Moment(MutableDate):
     @classmethod
     def unix(cls, timestamp, utc=False):
         """Create a date from a Unix timestamp."""
+        # Which function are we using?
         if utc:
-            fromtimestamp = datetime.utcfromtimestamp
+            func = datetime.utcfromtimestamp
         else:
-            fromtimestamp = datetime.fromtimestamp
+            func = datetime.fromtimestamp
         try:
             # Seconds since epoch
-            date = fromtimestamp(timestamp)
+            date = func(timestamp)
         except ValueError:
             # Milliseconds since epoch
-            date = fromtimestamp(timestamp / 1000)
+            date = func(timestamp / 1000)
+        # Feel like it's crazy this isn't default, but whatever.
+        if utc:
+            date = date.replace(tzinfo=pytz.utc)
         formula = "%Y-%m-%d"
         return cls(date, formula)
 

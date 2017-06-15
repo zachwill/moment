@@ -59,8 +59,8 @@ class SimpleAPI(TestCase):
         self.assertEqual(d, moment.date(d).date)
 
     def test_moment_unix_command(self):
-        d = moment.unix(1355788800000, utc=True)
-        expected = moment.date((2012, 12, 18))
+        d = moment.unix(1355788800, utc=True).date
+        expected = moment.utc((2012, 12, 18)).date
         self.assertEqual(d, expected)
 
     def test_moment_can_subtract_another_moment(self):
