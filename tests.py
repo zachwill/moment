@@ -98,11 +98,54 @@ class SimpleAPI(TestCase):
         self.assertEqual(copy, datetime(2016, 5, 14))
 
 
+class AdvancedDateParsing(TestCase):
+
+    def test_today(self):
+        d = moment.date("today").zero
+        now = moment.now().zero
+        self.assertEqual(d.date, now.date)
+
+    def test_yesterday(self):
+        d = moment.date("yesterday").zero
+        expecting = moment.now().zero.subtract(days=1)
+        self.assertEqual(d.date, expecting.date)
+
+    def test_future(self):
+        d = moment.date("tomorrow").zero
+        expecting = moment.now().zero.add(days=1)
+        self.assertEqual(d.date, expecting.date)
+
+    def test_2_weeks_ago(self):
+        d = moment.date("2 weeks ago").zero
+        expecting = moment.now().zero.subtract(weeks=2)
+        self.assertEqual(d.date, expecting.date)
+
+    def test_2_weeks_from_now(self):
+        d = moment.date("2 weeks from now").zero
+        expecting = moment.now().zero.add(weeks=2)
+        self.assertEqual(d, expecting)
+
+    def test_date_with_month_as_word(self):
+        d = moment.date("December 12, 2012").zero
+        expecting = moment.date((2012, 12, 12))
+        self.assertEqual(d, expecting)
+
+    def test_date_with_month_abbreviation(self):
+        d = moment.date("Dec 12, 2012").zero
+        expecting = moment.date((2012, 12, 12))
+        self.assertEqual(d, expecting)
+
+    def test_date_without_days_defaults_to_first_day(self):
+        d = moment.date("Dec 2012").zero
+        expecting = moment.date((2012, 12, 1))
+        self.assertEqual(d.date, expecting.date)
+
+
 class Replacement(TestCase):
 
     def test_simple_chaining_commands(self):
         d = moment.date([2012, 12, 18])
-        expecting = moment.date((2012, 12, 18, 1, 2, 3)).done()
+        expecting = moment.date((2012, 12, 18, 1, 2, 3))
         d.replace(hours=1, minutes=2, seconds=3)
         self.assertEqual(d, expecting)
 

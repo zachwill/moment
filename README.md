@@ -29,13 +29,22 @@ import moment
 from datetime import datetime
 
 # Create a moment from a string
-moment.date("12-18-2012", "M-D-YYYY")
+moment.date("12-18-2012")
 
 # Create a moment with strftime format
 moment.date("12-18-2012", "%m-%d-%Y")
 
-# By default, the "%Y-%m-%d" strftime format is used
+# Moment uses the awesome dateparser library behind the scenes
 moment.date("2012-12-18")
+
+# Create a moment with words in it
+moment.date("December 18, 2012")
+
+# Create a moment that would normally be pretty hard to code
+moment.date("2 weeks ago")
+
+# Create a future moment that would otherwise be really difficult
+moment.date("2 weeks from now")
 
 # Create a moment from the current datetime
 moment.now()

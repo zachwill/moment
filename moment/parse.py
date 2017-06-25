@@ -1,25 +1,28 @@
 from datetime import datetime
+
+import dateparser
+
 from .utils import STRING_TYPES
 
 
 def parse_date_and_formula(*args):
     """Doesn't need to be part of core Moment class."""
     date, formula = _parse_arguments(*args)
+    parse_settings = {"PREFER_DAY_OF_MONTH": "first"}
     if date and formula:
         if isinstance(date, datetime):
             return date, formula
         if '%' not in formula:
             formula = parse_js_date(formula)
-        date = datetime.strptime(date, formula)
+        date = dateparser.parse(date, date_formats=[formula], settings=parse_settings)
     elif isinstance(date, list) or isinstance(date, tuple):
         if len(date) == 1:
             # Python datetime needs the month and day, too.
             date = [date[0], 1, 1]
         date = datetime(*date)
     elif isinstance(date, STRING_TYPES):
-        if formula is None:
-            formula = "%Y-%m-%d"
-        date = datetime.strptime(date, formula)
+        date = dateparser.parse(date, settings=parse_settings)
+        formula = "%Y-%m-%d"
     return date, formula
 
 
