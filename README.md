@@ -53,7 +53,7 @@ moment.now()
 moment.utcnow()
 
 # Create a moment with the UTC time zone
-moment.utc("2012-12-18", "YYYY-M-D")
+moment.utc("2012-12-18")
 
 # Create a moment from a Unix timestamp
 moment.unix(1355875153626)
