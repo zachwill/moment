@@ -31,7 +31,7 @@ from datetime import datetime
 # Create a moment from a string
 moment.date("12-18-2012")
 
-# Create a moment with strftime format
+# Create a moment with a specified strftime format
 moment.date("12-18-2012", "%m-%d-%Y")
 
 # Moment uses the awesome dateparser library behind the scenes
