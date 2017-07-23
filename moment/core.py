@@ -35,7 +35,7 @@ class Moment(MutableDate):
     def utcnow(cls):
         """UTC equivalent to now."""
         date = pytz.timezone("UTC").localize(datetime.utcnow())
-        formula= "%Y-%m-%dT%H:%M:%S"
+        formula = "%Y-%m-%dT%H:%M:%S"
         return cls(date, formula)
 
     @classmethod
@@ -112,10 +112,11 @@ class Moment(MutableDate):
 
     def __repr__(self):
         if self._date is not None:
-            return "<Moment(%s)>" % (self._date.strftime(self._formula))
+            formatted = self._date.strftime("%Y-%m-%dT%H:%M:%S")
+            return "<Moment(%s)>" % (formatted)
         return "<Moment>"
 
     def __str__(self):
-        formatted = self._date.strftime('%Y-%m-%dT%H:%M:%S')
-        tz = str.format('{0:+06.2f}', -float(timezone) / 3600)
+        formatted = self._date.strftime("%Y-%m-%dT%H:%M:%S")
+        tz = str.format("{0:+06.2f}", -float(timezone) / 3600)
         return formatted + tz

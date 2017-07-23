@@ -107,7 +107,7 @@ def parse_js_date(date):
         date = date.replace('D', '%d')
     # Moment.js shorthand
     elif 'L' in date:
-        date = date.replace('L', '%Y-%m-%dT%H:%M:%SZ')
+        date = date.replace('L', '%Y-%m-%dT%H:%M:%S')
     # A necessary evil right now...
     if '%min' in date:
         date = date.replace('%min', '%M')
