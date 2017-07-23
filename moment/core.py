@@ -21,7 +21,7 @@ class Moment(MutableDate):
     def now(cls):
         """Create a moment with the current datetime."""
         date = datetime.now()
-        formula = "%Y-%m-%d"
+        formula = "%Y-%m-%dT%H:%M:%S"
         return cls(date, formula)
 
     @classmethod
@@ -35,7 +35,7 @@ class Moment(MutableDate):
     def utcnow(cls):
         """UTC equivalent to now."""
         date = pytz.timezone("UTC").localize(datetime.utcnow())
-        formula= "%Y-%m-%d"
+        formula= "%Y-%m-%dT%H:%M:%S"
         return cls(date, formula)
 
     @classmethod
@@ -55,7 +55,7 @@ class Moment(MutableDate):
         # Feel like it's crazy this isn't default, but whatever.
         if utc:
             date = date.replace(tzinfo=pytz.utc)
-        formula = "%Y-%m-%d"
+        formula = "%Y-%m-%dT%H:%M:%S"
         return cls(date, formula)
 
     def locale(self, zone=None):

@@ -22,7 +22,7 @@ def parse_date_and_formula(*args):
         date = datetime(*date)
     elif isinstance(date, STRING_TYPES):
         date = dateparser.parse(date, settings=parse_settings)
-        formula = "%Y-%m-%d"
+        formula= "%Y-%m-%dT%H:%M:%S"
     return date, formula
 
 
