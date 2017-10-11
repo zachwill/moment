@@ -16,7 +16,9 @@ A Python library for dealing with dates/times. Inspired by both
 Installation
 ------------
 
-I would advise that this is alpha-quality software.
+I would advise that this is alpha-quality software. You might also be interested in the [Python `arrow` package][arrow].
+
+[arrow]: https://github.com/crsmithdev/arrow/
 
 `pip install moment`
 
