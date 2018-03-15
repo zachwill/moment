@@ -210,5 +210,27 @@ class Weekdays(TestCase):
         self.assertEqual(d.replace(weekday=24).date, expecting)
 
 
+class SubtractMonth(TestCase):
+
+    def test_subtract_twelve_month_from_last_month(self):
+        d = moment.date((2012, 12, 1))
+        expecting = moment.date((2011, 12, 1)).date
+        self.assertEqual(d.subtract(months=12).date, expecting)
+
+    def test_subtract_one_month_from_first_month(self):
+        d = moment.date((2012, 1, 1))
+        expecting = moment.date((2011, 12, 1)).date
+        self.assertEqual(d.subtract(months=1).date, expecting)
+
+    def test_subtract_less_then_cur_month(self):
+        d = moment.date((2012, 3, 1))
+        expecting = moment.date((2011, 9, 1)).date
+        self.assertEqual(d.subtract(months=6).date, expecting)
+
+    def test_subtract_zero_months(self):
+        d = moment.date((2012, 3, 1))
+        expecting = moment.date((2012, 3, 1)).date
+        self.assertEqual(d.subtract(months=0).date, expecting)
+
 if __name__ == '__main__':
     main()

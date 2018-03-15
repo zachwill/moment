@@ -22,6 +22,8 @@ def add_month(date, number):
 def subtract_month(date, number):
     """Subtract a number of months from a date."""
     month = date.month - 1 - number
+    if month < 0:
+        month -= 12
     return update_month(date, month)
 
 
