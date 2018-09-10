@@ -142,3 +142,35 @@ moment.utcnow().weekday
 # And, there's an easy way to zero out the hours, minutes, and seconds
 moment.utcnow().zero
 ```
+
+Optional: Use [duckling](https://github.com/facebook/duckling)
+--------
+
+- [Duckling](https://github.com/facebook/duckling) is a library from Facebook to parse text (time expressions and others) into structured data.
+
+- It is a Haskell library, so to use this you ll need a duckling server running on 0.0.0.0:8000 ([see the installation instructions](https://github.com/facebook/duckling#quickstart))
+
+- Integrating with duckling allows to parse fairly complex time expressions such as `day after tomorrow`, `next Saturday` that are not covered by moment atm.
+
+- However, this is completely optional, this behavior only triggers if moment fails to get the date (returns None) and duckling is installed. Else reverts back to the usual moment output.        
+
+With duckling:
+
+```python
+>>> moment.date('day after tomorrow')
+<Moment(2018-09-12T00:00:00)>
+>>> moment.date('next saturday')
+<Moment(2018-09-15T00:00:00)>
+>>> 
+
+```
+
+W/o duckling:
+
+```python
+>>> import moment
+>>> moment.date('day after tomorrow')
+<Moment>
+>>> moment.date('next saturday')
+<Moment>
+```
