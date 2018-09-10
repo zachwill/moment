@@ -1,11 +1,12 @@
 from datetime import datetime
 
 import dateparser
+from .ducklingparser import DucklingDateParser
 
 from .utils import STRING_TYPES
 
 
-def parse_date_and_formula(*args):
+def parse_date_and_formula(*args, **kwargs):
     """Doesn't need to be part of core Moment class."""
     date, formula = _parse_arguments(*args)
     parse_settings = {"PREFER_DAY_OF_MONTH": "first"}
@@ -21,8 +22,11 @@ def parse_date_and_formula(*args):
             date = [date[0], 1, 1]
         date = datetime(*date)
     elif isinstance(date, STRING_TYPES):
+        _date = date
         date = dateparser.parse(date, settings=parse_settings)
         formula= "%Y-%m-%dT%H:%M:%S"
+        if date is None:  # try parsing the date with duckling (https://github.com/facebook/duckling)
+            date = DucklingDateParser(**kwargs).parse(_date, date_formats=[formula], settings=parse_settings)
     return date, formula
 
 
