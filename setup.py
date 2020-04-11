@@ -9,7 +9,7 @@ except ImportError:
 
 setup(
     name="moment",
-    version="0.8.1",
+    version="0.9",
     url="http://github.com/zachwill/moment",
     author="Zach Williams",
     author_email="hey@zachwill.com",
@@ -19,9 +19,9 @@ setup(
         "moment"
     ],
     install_requires=[
-        "dateparser>=0.6",
-        "pytz>=2017.2",
-        "times",
+        "dateparser>=0.7",
+        "pytz>=2018.9",
+        "times>=0.7",
     ],
     license="MIT",
     classifiers=[
@@ -30,6 +30,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
 )
