@@ -1,11 +1,8 @@
 moment
 ======
 
-[![Build Status](https://travis-ci.org/zachwill/moment.svg?branch=master)](https://travis-ci.org/zachwill/moment)
-
-A Python library for dealing with dates/times. Inspired by both
-[**Moment.js**][moment] and the simplicity of Kenneth Reitz's
-[**Requests**][requests] library. Ideas were also taken from the
+A Python library for dealing with dates/times. Inspired by [**Moment.js**][moment] and
+Kenneth Reitz's [**Requests**][requests] library. Ideas were also taken from the
 [**Times**][times] Python module.
 
 [moment]: http://momentjs.com/docs/
@@ -16,9 +13,15 @@ A Python library for dealing with dates/times. Inspired by both
 Installation
 ------------
 
-I would advise that this is alpha-quality software. You might also be interested in the [Python `arrow` package][arrow].
+I would advise that this is beta-quality software. You might be interested in:
+
+- the [`arrow` package][arrow]
+- the [`pendulum` package][pendulum]
 
 [arrow]: https://github.com/crsmithdev/arrow/
+[pendulum]: https://github.com/sdispater/pendulum
+
+Still want to use `moment`?
 
 `pip install moment`
 
