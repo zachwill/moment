@@ -121,7 +121,7 @@ class AdvancedDateParsing(TestCase):
         self.assertEqual(d.date, expecting.date)
 
     def test_2_weeks_from_now(self):
-        d = moment.date("2 weeks from now").zero
+        d = moment.date("2 weeks now").zero
         expecting = moment.now().zero.add(weeks=2)
         self.assertEqual(d, expecting)
 

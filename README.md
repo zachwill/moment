@@ -49,7 +49,7 @@ moment.date("December 18, 2012")
 moment.date("2 weeks ago")
 
 # Create a future moment that would otherwise be really difficult
-moment.date("2 weeks from now")
+moment.date("2 weeks now")
 
 # Create a moment from the current datetime
 moment.now()
