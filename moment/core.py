@@ -83,13 +83,27 @@ class Moment(MutableDate):
             self._date = date
         return self
 
+    def _check_for_suffix(self, formula):
+        """Check to see if a suffix is need for this date."""
+        if "%^" in formula:
+            day = self.day
+            # https://stackoverflow.com/questions/5891555/display-the-date-like-may-5th-using-pythons-strftime
+            if 4 <= day <= 20 or 24 <= day <= 30:
+                suffix = "th"
+            else:
+                suffix = ["st", "nd", "rd"][day % 10 - 1]
+            formula = formula.replace("%^", suffix)
+        return formula
+
     def format(self, formula):
         """Display the moment in a given format."""
         formula = parse_js_date(formula)
+        formula = self._check_for_suffix(formula)
         return self._date.strftime(formula)
 
     def strftime(self, formula):
         """Takes a Pythonic format, rather than the JS version."""
+        formula = self._check_for_suffix(formula)
         return self._date.strftime(formula)
 
     def diff(self, moment, measurement=None):

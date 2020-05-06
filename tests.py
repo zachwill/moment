@@ -120,11 +120,6 @@ class AdvancedDateParsing(TestCase):
         expecting = moment.now().zero.subtract(weeks=2)
         self.assertEqual(d.date, expecting.date)
 
-    def test_2_weeks_from_now(self):
-        d = moment.date("2 weeks now").zero
-        expecting = moment.now().zero.add(weeks=2)
-        self.assertEqual(d, expecting)
-
     def test_date_with_month_as_word(self):
         d = moment.date("December 12, 2012").zero
         expecting = moment.date((2012, 12, 12))
@@ -154,6 +149,11 @@ class Replacement(TestCase):
         d.replace(hours=1).add(minutes=2).replace(seconds=3)
         expecting = "2012-12-18 01:02:03"
         self.assertEqual(d.format('YYYY-MM-DD hh:mm:ss'), expecting)
+
+    def test_suffix_formula(self):
+        d = moment.utc((2012, 12, 18)).zero
+        expecting = "December 18th, 2012"
+        self.assertEqual(d.strftime("%B %-d%^, %Y"), expecting)
 
     def test_properties_after_chaining(self):
         d = moment.now().replace(years=1984, months=1, days=1)

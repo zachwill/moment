@@ -48,9 +48,6 @@ moment.date("December 18, 2012")
 # Create a moment that would normally be pretty hard to do
 moment.date("2 weeks ago")
 
-# Create a future moment that would otherwise be really difficult
-moment.date("2 weeks now")
-
 # Create a moment from the current datetime
 moment.now()
 
@@ -77,6 +74,9 @@ moment.now().format("YYYY-M-D")
 
 # Create and format a moment with strftime semantics
 moment.date(2012, 12, 18).strftime("%Y-%m-%d")
+
+# Use the special `%^` combo to add a date suffix (1st, 2nd, 3rd, 4th, etc)
+moment.date(2012, 12, 18).strftime("%B %-d%^, %Y")
 
 # Update your moment's time zone
 moment.date(datetime(2012, 12, 18)).locale("US/Central").date
