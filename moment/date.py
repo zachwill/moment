@@ -15,22 +15,26 @@ from .utils import _iteritems
 
 def add_month(date, number):
     """Add a number of months to a date."""
-    month = date.month - 1 + number
-    return update_month(date, month)
+    return month_delta(date, month)
 
 
 def subtract_month(date, number):
     """Subtract a number of months from a date."""
-    month = date.month - 1 - number
-    return update_month(date, month)
+    negative_month = number * -1
+    return month_delta(date, negative_month)
 
 
-def update_month(date, month):
-    """Create a new date with a modified number of months."""
-    year = date.year + int(month / 12)
-    month = month % 12 + 1
+def month_delta(date, delta):
+    """
+    Create a new date with a modified number of months.
+
+    https://stackoverflow.com/a/22443132/485216
+    """
+    month, year = (date.month + delta) % 12, date.year + ((date.month) + delta - 1)
+    if not month:
+        month = 12
     day = min(date.day, calendar.monthrange(year, month)[1])
-    return date.replace(year=year, month=month, day=day)
+    return date.replace(day=day,month=month, year=year)
 
 
 # ----------------------------------------------------------------------------
