@@ -177,6 +177,12 @@ class Replacement(TestCase):
         expecting = moment.date("2019-12-01")
         self.assertEqual(d, expecting)
 
+    def test_subtract_several_months(self):
+        d = moment.date("2020-11-01")
+        d.subtract(months=20)
+        expecting = moment.date("2019-03-01")
+        self.assertEqual(d, expecting)
+
     def test_chaining_with_replace_method(self):
         d = moment.date((2012, 12, 19))
         d.replace(hours=1, minutes=2, seconds=3)
