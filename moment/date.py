@@ -15,7 +15,7 @@ from .utils import _iteritems
 
 def add_month(date, number):
     """Add a number of months to a date."""
-    return month_delta(date, month)
+    return month_delta(date, number)
 
 
 def subtract_month(date, number):
