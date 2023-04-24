@@ -49,7 +49,7 @@ class Moment(MutableDate):
         try:
             # Seconds since epoch
             date = func(timestamp)
-        except ValueError:
+        except (ValueError, OSError):
             # Milliseconds since epoch
             date = func(timestamp / 1000)
         # Feel like it's crazy this isn't default, but whatever.
